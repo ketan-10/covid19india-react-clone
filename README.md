@@ -18,3 +18,6 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 4) To learn about how to implement common patterns like dark-mode, multi-language support, data-fetching, lazy-loading etc.
 
 
+### Steps
+
+1) `yarn create vite`
