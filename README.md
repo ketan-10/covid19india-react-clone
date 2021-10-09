@@ -34,3 +34,5 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 **Pre Commit Hooks To lint before commit**
 
 - [Build a Modern JS Project - #4 Pre-commit with Husky & lint-staged](https://youtu.be/6u9gmwTl3bY)
+
+- [StackOverflow Fix to `husky` not creating git hooks in `.git` directory](https://stackoverflow.com/questions/50048717/lint-staged-not-running-on-precommit)
