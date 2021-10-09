@@ -7,7 +7,8 @@
     "serve": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"**/*.+(js|ts|jsx|tsx|json|yml|yaml|md|html)\""
+    "format": "prettier --write \"**/*.+(js|ts|jsx|tsx|json|yml|yaml|md|html)\"",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
