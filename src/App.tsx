@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './App.scss';
 
 const App: React.FC = () => {
   const [message, useMessage] = useState('Hello World');
