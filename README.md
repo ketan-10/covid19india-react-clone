@@ -66,3 +66,7 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - [css url is not replaced- issue](https://github.com/vitejs/vite/issues/3980#issuecomment-870422216)
 
 - [solution using public directory](https://vitejs.dev/guide/assets.html#the-public-directory)
+
+- [Git gh-pages branch and newly created subtree in dist directory does not match git-history](https://stackoverflow.com/questions/33172857/how-do-i-force-a-subtree-push-to-overwrite-remote-changes)
+
+- [Solution Just use npm gh-pages](https://www.npmjs.com/package/gh-pages)
