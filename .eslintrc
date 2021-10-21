@@ -2,8 +2,11 @@
   "extends": [ "wesbos/typescript" ],
   "rules":{
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
+    // "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-use-before-define": "off",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "off"
+    "@typescript-eslint/no-shadow": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off"
   }
 }

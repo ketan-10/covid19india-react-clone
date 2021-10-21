@@ -45,3 +45,11 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - [Immer Tutorial | Immer and React Match Made in Heaven](https://youtu.be/8kC5fHlir4E)
 
 - [REACT MEMO vs USECALLBACK vs USEMEMO](https://youtu.be/uojLJFt9SzY)
+
+**CSS**
+
+- [How to host your own fonts made simple](https://youtu.be/KzqQXDbDvus)
+
+**React**
+
+- [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
