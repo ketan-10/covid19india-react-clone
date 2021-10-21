@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "sass-lint": "sass-lint 'src/**/*.scss' -v -f table --max-warnings 0",
     "sass-lint:fix": "sass-lint-auto-fix 'src/**/*.scss' -d -h -c .sass-lint-auto-fix.yml",
-    "deploy": "git add dist -f && git commit -m \"next version\" && git push heroku `git subtree split --prefix dist origin gh-pages`:gh-pages --force"
+    "deploy": "git add dist -f && git commit -m \"next version\" && git push origin `git subtree split --prefix dist origin gh-pages`:gh-pages --force"
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [
