@@ -59,7 +59,7 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - [How to Deploy Your Vite App to Github Pages // Vue app deployment in 5 quick steps](https://youtu.be/yo2bMGnIKE8)
 
   - `yarn build`
-  - `yarn add dist -f`
+  - `git add dist -f`
   - `git commit -m "next version"`
   - `git subtree push --prefix dist origin gh-pages`
 
