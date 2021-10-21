@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const pages: Array<Page> = [
     {
       pageLink: '/',
-      view: <>Home</>,
+      view: <>Home 1</>,
       displayName: 'Home',
       showInNavbar: true,
     },
