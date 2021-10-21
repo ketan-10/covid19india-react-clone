@@ -10,7 +10,8 @@
     "format": "prettier --write \"**/*.+(js|ts|jsx|tsx|json|yml|yaml|md|html)\"",
     "prepare": "husky install",
     "sass-lint": "sass-lint 'src/**/*.scss' -v -f table --max-warnings 0",
-    "sass-lint:fix": "sass-lint-auto-fix 'src/**/*.scss' -d -h -c .sass-lint-auto-fix.yml"
+    "sass-lint:fix": "sass-lint-auto-fix 'src/**/*.scss' -d -h -c .sass-lint-auto-fix.yml",
+    "deploy": "git add dist -f && git commit -m \"next version\" && git subtree push --prefix dist origin gh-pages"
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [
