@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import { Page } from './types/Types';
+import { BASE_URL } from './Constants';
 
 const App: React.FC = () => {
   const pages: Array<Page> = [
@@ -39,7 +40,7 @@ const App: React.FC = () => {
   ];
   return (
     <div className="app">
-      <Router>
+      <Router basename={BASE_URL}>
         <NavBar pages={pages} />
         <Switch>
           {pages.map((page) => (
