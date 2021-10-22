@@ -62,6 +62,7 @@ const Expand: React.FC<ExpandProps> = ({ pages, setIsOpen }) => {
             </span>
           </Link>
         ))}
+      <span className="expand-bottom">A crowdsourced initiative</span>
     </div>
   );
 };
