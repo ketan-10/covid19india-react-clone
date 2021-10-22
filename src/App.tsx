@@ -1,6 +1,11 @@
 import './App.scss';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import NavBar from './components/NavBar';
 import { Page } from './types/Types';
 import { BASE_URL } from './Constants';
@@ -48,6 +53,7 @@ const App: React.FC = () => {
               {page.view}
             </Route>
           ))}
+          <Redirect to="/" />
         </Switch>
       </Router>
     </div>
