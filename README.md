@@ -54,7 +54,7 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
 
-**Vitejs with gh-pages**
+**gh-pages with ViteJs**
 
 - [How to Deploy Your Vite App to Github Pages // Vue app deployment in 5 quick steps](https://youtu.be/yo2bMGnIKE8)
 
@@ -70,3 +70,21 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - [Git gh-pages branch and newly created subtree in dist directory does not match git-history](https://stackoverflow.com/questions/33172857/how-do-i-force-a-subtree-push-to-overwrite-remote-changes)
 
 - [Solution Just use npm gh-pages](https://www.npmjs.com/package/gh-pages)
+
+**gh-pages with React-router**
+
+When we provide a url in gh-pages, github considers it as actual url
+But if we are using a single page application, the url will be stored in the browser history.
+
+eg https://ketan-10.github.io/covid19india-react-clone/about/ github will try to find the exact location
+but actually the location is https://ketan-10.github.io/covid19india-react-clone and /about is in the browser history api.
+
+So we add 404.html page which, github will trigger if no url match,
+and the 404.html will then convert that url to query string and pass to index.html,
+index.html will decode that query string and append the /about path in history api.
+
+[question: React-router with gh-pages](https://stackoverflow.com/questions/58228017/react-router-v4-cant-load-page-on-github-pages)
+
+[solution: spa-github-pages](https://github.com/rafgraph/spa-github-pages#how-it-works)
+
+[404.html with gh-pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)
