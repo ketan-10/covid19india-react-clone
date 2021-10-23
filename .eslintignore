@@ -1,4 +1,4 @@
 vite.config.ts
-build/**
+dist/**
 node_modules/**
 *.html
