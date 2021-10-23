@@ -5,60 +5,64 @@
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-     <!-- Font Preloading -->
-     <link
-     rel="preload"
-     href="/covid19india-react-clone/fonts/Archia/archia-semibold-webfont.woff2"
-     as="font"
-     type="font/woff2"
-     crossorigin
-   />
-   <link
-     rel="preload"
-     href="/covid19india-react-clone/fonts/Archia/archia-medium-webfont.woff2"
-     as="font"
-     type="font/woff2"
-     crossorigin
-   />
-   <link
-     rel="preload"
-     href="/covid19india-react-clone/fonts/Archia/archia-bold-webfont.woff2"
-     as="font"
-     type="font/woff2"
-     crossorigin
-   />
+    <!-- Font Preloading -->
+    <link
+      rel="preload"
+      href="/covid19india-react-clone/fonts/Archia/archia-semibold-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/covid19india-react-clone/fonts/Archia/archia-medium-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/covid19india-react-clone/fonts/Archia/archia-bold-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
-  <!-- https://stackoverflow.com/questions/58228017/react-router-v4-cant-load-page-on-github-pages -->
-  <!-- Start Single Page Apps for GitHub Pages -->
-  <script type="text/javascript">
-    // Single Page Apps for GitHub Pages
-    // MIT License
-    // https://github.com/rafgraph/spa-github-pages
-    // This script checks to see if a redirect is present in the query string,
-    // converts it back into the correct url and adds it to the
-    // browser's history using window.history.replaceState(...),
-    // which won't cause the browser to attempt to load the new url.
-    // When the single page app is loaded further down in this file,
-    // the correct url will be waiting in the browser's history for
-    // the single page app to route accordingly.
-    (function(l) {
-      if (l.search[1] === '/' ) {
-        var decoded = l.search.slice(1).split('&').map(function(s) { 
-          return s.replace(/~and~/g, '&')
-        }).join('?');
-        window.history.replaceState(null, null,
+    <!-- https://stackoverflow.com/questions/58228017/react-router-v4-cant-load-page-on-github-pages -->
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(
+            null,
+            null,
             l.pathname.slice(0, -1) + decoded + l.hash
-        );
-      }
-    }(window.location))
-  </script>
-  <!-- End Single Page Apps for GitHub Pages -->
-  
+          );
+        }
+      })(window.location);
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
 
-   <link rel="stylesheet" href="/covid19india-react-clone/font-faces.css"/>
-
-    <script type="module" crossorigin src="/covid19india-react-clone/assets/index.b40432e8.js"></script>
-    <link rel="modulepreload" href="/covid19india-react-clone/assets/vendor.e00535a3.js">
+    <link rel="stylesheet" href="/covid19india-react-clone/font-faces.css" />
+    <script type="module" crossorigin src="/covid19india-react-clone/assets/index.92a5022a.js"></script>
+    <link rel="modulepreload" href="/covid19india-react-clone/assets/vendor.42ad0733.js">
     <link rel="stylesheet" href="/covid19india-react-clone/assets/index.771a5e52.css">
   </head>
   <body>
