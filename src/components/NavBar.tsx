@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useLockBodyScroll } from 'react-use';
 import { Page } from '../types/Types';
 
 interface NavBarProps {
@@ -8,6 +9,7 @@ interface NavBarProps {
 
 const NavBar: React.FC<NavBarProps> = ({ pages }) => {
   const [isOpen, setIsOpen] = useState(false);
+  useLockBodyScroll(isOpen);
   // const history = useHistory(); // does not re-render on route change
 
   // console.log(history.location.pathname);
