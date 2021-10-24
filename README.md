@@ -98,3 +98,5 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 **Miscellaneous**
 
 - [How to prevent scrollbar from repositioning web page?](https://stackoverflow.com/a/60383125/10066692)
+
+- [How to remove blue highlight when you hold on input buttons in css?](https://stackoverflow.com/questions/35832150/how-to-remove-blue-highlight-when-you-hold-on-input-buttons-in-css)

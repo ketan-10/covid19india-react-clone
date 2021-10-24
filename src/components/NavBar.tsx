@@ -43,11 +43,11 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
         </div>
         <div
           className="navbar__right"
-          {...{
-            onClick: windowSize.width <= 768 ? toggleMenu : undefined,
-          }}
+          {...(windowSize.width < 769 && {
+            onClick: toggleMenu,
+          })}
         >
-          {windowSize.width <= 768 ? (
+          {windowSize.width < 769 ? (
             <span>{!isOpen ? 'Menu' : 'Close'}</span>
           ) : (
             <div
@@ -100,10 +100,9 @@ const Expand: React.FC<ExpandProps> = ({
 }) => (
   <div
     className="navbar__menu"
-    {...{
-      onMouseLeave:
-        windowSize.width > 768 ? setIsOpen.bind(null, false) : undefined,
-    }}
+    {...(windowSize.width >= 769 && {
+      onMouseLeave: setIsOpen.bind(null, false),
+    })}
   >
     {pages
       .filter((p) => p.showInNavbar)

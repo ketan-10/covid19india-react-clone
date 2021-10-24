@@ -90,6 +90,8 @@ html {
 }
 
 body {
+  -webkit-tap-highlight-color: transparent; // remove blue highlight when you hold on input buttons in css
+  -webkit-touch-callout: none; // disable callout to show number of touches on safari
   overflow-x: hidden; // hide horizontal scrollbar
   margin: 0;
   padding: 0;
@@ -249,7 +251,7 @@ h6 {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .navbar {
     .navbar-container {
       background: var(--gray-light-opaque);
