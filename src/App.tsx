@@ -47,14 +47,16 @@ const App: React.FC = () => {
     <div className="app">
       <Router basename={BASE_URL}>
         <NavBar pages={pages} />
-        <Switch>
-          {pages.map((page) => (
-            <Route exact path={page.pageLink} key={page.pageLink}>
-              {page.view}
-            </Route>
-          ))}
-          <Redirect to="/" />
-        </Switch>
+        <div className="page">
+          <Switch>
+            {pages.map((page) => (
+              <Route exact path={page.pageLink} key={page.pageLink}>
+                {page.view}
+              </Route>
+            ))}
+            <Redirect to="/" />
+          </Switch>
+        </div>
       </Router>
     </div>
   );

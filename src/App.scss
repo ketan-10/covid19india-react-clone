@@ -77,7 +77,9 @@
 }
 
 html {
-  box-sizing: border-box;
+  box-sizing: border-box; // so width will be calculated with padding and border
+  width: 100vw;
+  // padding-right: 1.2rem; // escape scroll-bar width
 }
 
 *,
@@ -88,6 +90,7 @@ html {
 }
 
 body {
+  overflow-x: hidden; // hide horizontal scrollbar
   margin: 0;
   padding: 0;
 }
@@ -157,8 +160,11 @@ h6 {
       a {
         color: var(--gray);
         text-decoration: none;
-        span {
+        span.blue {
           color: var(--blue);
+        }
+        span.space {
+          font-size: 0;
         }
       }
     }
@@ -166,15 +172,34 @@ h6 {
     .navbar__right {
       color: var(--gray);
       cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 1.5rem;
-      width: calc(
-        3em + 3rem
-      ); // 3em for word size and 3rem for padding 1.5 each
+      // width: calc(
+      //   3em + 3rem
+      // ); // 3em for word size and 3rem for padding 1.5 each
 
-      &:hover {
-        color: var(--dark-m-gray);
+      span {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 1.5rem;
+        padding-right: 2rem;
+      }
+
+      .nav-icons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 4.2rem;
+          width: 100%;
+          &:hover {
+            color: var(--blue);
+          }
+        }
       }
     }
   }
@@ -200,6 +225,9 @@ h6 {
       border-top: 1px solid var(--gray-light);
       border-bottom: 1px solid var(--gray-light);
 
+      &:hover {
+        background: var(--pblue-hover);
+      }
       .selected {
         background: var(--pblue-light);
         color: var(--pblue);
@@ -218,5 +246,52 @@ h6 {
       // can't use parent div as navbar__menu is position:absolute
       padding: 2em;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    .navbar-container {
+      background: var(--gray-light-opaque);
+      flex-direction: column;
+      height: 100vh;
+      width: 6rem;
+      position: fixed;
+      align-items: center;
+      text-align: center;
+
+      .navbar__left {
+        order: 3;
+        margin-top: auto;
+      }
+      .navbar__middle {
+        font-size: 0.625rem;
+        width: 4rem;
+        padding: 2rem 0; // padding should be em not rem, as it can grow/shrink if font-size of current element is overwritten by higher priority class eg inline css. but I don't want to get into that 😁
+      }
+      .navbar__right {
+        width: 100%; //
+      }
+    }
+
+    .navbar__menu {
+      position: fixed;
+      width: 15rem;
+      margin-left: 6rem;
+      padding-top: calc(0.625rem * 2.3 + 4rem);
+
+      a {
+        border: 0 !important;
+        font-weight: 600;
+      }
+
+      .expand-bottom {
+        margin-bottom: 0; // to eliminate the extra gap of 100vh navbar
+        margin-top: 0; // don't auto flow to bottom
+      }
+    }
+  }
+  .page {
+    margin-left: 6rem; // escape the vertical navbar
   }
 }

@@ -50,6 +50,8 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [How to host your own fonts made simple](https://youtu.be/KzqQXDbDvus)
 
+- [My Css Study](https://github.com/ketan-10/Testing/tree/master/pages)
+
 **React**
 
 - [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
@@ -73,18 +75,26 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 **gh-pages with React-router**
 
-When we provide a url in gh-pages, github considers it as actual url
-But if we are using a single page application, the url will be stored in the browser history.
+- When we provide a url in gh-pages, github considers it as actual url
+  But if we are using a single page application, the url will be stored in the browser history.
 
-eg https://ketan-10.github.io/covid19india-react-clone/about/ github will try to find the exact location
-but actually the location is https://ketan-10.github.io/covid19india-react-clone and /about is in the browser history api.
+- eg https://ketan-10.github.io/covid19india-react-clone/about/ github will try to find the exact location
+  but actually the location is https://ketan-10.github.io/covid19india-react-clone and /about is in the browser history api.
 
-So we add 404.html page which, github will trigger if no url match,
-and the 404.html will then convert that url to query string and pass to index.html,
-index.html will decode that query string and append the /about path in history api.
+- So we add 404.html page which, github will trigger if no url match,
+  and the 404.html will then convert that url to query string and pass to index.html,
+  index.html will decode that query string and append the /about path in history api.
 
-[question: React-router with gh-pages](https://stackoverflow.com/questions/58228017/react-router-v4-cant-load-page-on-github-pages)
+- [question: React-router with gh-pages](https://stackoverflow.com/questions/58228017/react-router-v4-cant-load-page-on-github-pages)
 
-[solution: spa-github-pages](https://github.com/rafgraph/spa-github-pages#how-it-works)
+- [solution: spa-github-pages](https://github.com/rafgraph/spa-github-pages#how-it-works)
 
-[404.html with gh-pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)
+- [404.html with gh-pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)
+
+**D3.js**
+
+- [D3.js tutorial by andrew chen](https://www.youtube.com/watch?v=UYrJ4jukvig&list=PLPtgdQ4YE9cgdPwOKShhPHdVEseLPGd_t)
+
+**Miscellaneous**
+
+- [How to prevent scrollbar from repositioning web page?](https://stackoverflow.com/a/60383125/10066692)
