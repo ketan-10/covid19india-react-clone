@@ -134,9 +134,7 @@ h6 {
 }
 
 .navbar {
-  > * {
-    //select all children
-  }
+  z-index: 9999; // navbar should be on top (top stacking context)
 
   .navbar-container {
     display: flex;
@@ -205,49 +203,53 @@ h6 {
       }
     }
   }
-  .navbar__menu {
-    // display: ;
+  .nav-animated-menu {
     position: absolute;
-    width: 100%;
-    height: 100vh;
-    z-index: 9999;
-    // top: 50px;
 
-    // height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+    .navbar__menu {
+      width: 100vw;
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
 
-    background: var(--gray-light-opaque);
+      background: var(--gray-light-opaque);
 
-    a {
-      text-decoration: none;
-      color: var(--gray);
-      padding: 1.5rem;
-      border-top: 1px solid var(--gray-light);
-      border-bottom: 1px solid var(--gray-light);
+      a {
+        text-decoration: none;
+        color: var(--gray);
+        padding: 1.5rem;
+        border-top: 1px solid var(--gray-light);
+        border-bottom: 1px solid var(--gray-light);
 
-      &:hover {
-        background: var(--pblue-hover);
+        &:hover {
+          background: var(--pblue-hover);
+        }
+        .selected {
+          background: var(--pblue-light);
+          color: var(--pblue);
+          padding: 0.25rem;
+        }
       }
-      .selected {
-        background: var(--pblue-light);
-        color: var(--pblue);
-        padding: 0.25rem;
+      .expand-bottom {
+        font-size: 12px;
+        color: var(--gray);
+        font-weight: 680;
+        margin-top: auto;
+        margin-bottom: calc(
+          12px + 3rem
+        ); // to eliminate the gap between the navbar
+        // as navbar__menu length is 100vh we have to add margin-bottom
+        // can't use parent div as navbar__menu is position:absolute
+        padding: 2em;
       }
     }
-    .expand-bottom {
-      font-size: 12px;
-      color: var(--gray);
-      font-weight: 680;
-      margin-top: auto;
-      margin-bottom: calc(
-        12px + 3rem
-      ); // to eliminate the gap between the navbar
-      // as navbar__menu length is 100vh we have to add margin-bottom
-      // can't use parent div as navbar__menu is position:absolute
-      padding: 2em;
-    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar__menu {
+    overflow: auto; // so content does not overflow while animation!!!
   }
 }
 
@@ -275,21 +277,21 @@ h6 {
         width: 100%; //
       }
     }
+    .nav-animated-menu {
+      .navbar__menu {
+        position: fixed;
+        width: 15rem;
+        padding-top: calc(0.625rem * 2.3 + 4rem);
 
-    .navbar__menu {
-      position: fixed;
-      width: 15rem;
-      margin-left: 6rem;
-      padding-top: calc(0.625rem * 2.3 + 4rem);
+        a {
+          border: 0 !important;
+          font-weight: 600;
+        }
 
-      a {
-        border: 0 !important;
-        font-weight: 600;
-      }
-
-      .expand-bottom {
-        margin-bottom: 0; // to eliminate the extra gap of 100vh navbar
-        margin-top: 0; // don't auto flow to bottom
+        .expand-bottom {
+          margin-bottom: 0; // to eliminate the extra gap of 100vh navbar
+          margin-top: 0; // don't auto flow to bottom
+        }
       }
     }
   }

@@ -52,6 +52,14 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [My Css Study](https://github.com/ketan-10/Testing/tree/master/pages)
 
+- [How to prevent scrollbar from repositioning web page?](https://stackoverflow.com/a/60383125/10066692)
+
+- [How to remove blue highlight when you hold on input buttons in css?](https://stackoverflow.com/questions/35832150/how-to-remove-blue-highlight-when-you-hold-on-input-buttons-in-css)
+
+- [Z-Index Stacking Context by Kevin Powell](https://youtu.be/uS8l4YRXbaw)
+
+- Side Navbar - Position:Fixed on navbar, and margin left on content.
+
 **React**
 
 - [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
@@ -95,8 +103,16 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [D3.js tutorial by andrew chen](https://www.youtube.com/watch?v=UYrJ4jukvig&list=PLPtgdQ4YE9cgdPwOKShhPHdVEseLPGd_t)
 
+**Animation**
+
+- A Component renders multiple times, but animation should not happen each time component render.
+- Also when we want to remove the element from the DOM, we cant just remove as there will be no animations.
+- So all this is handled by [`useTransition`](https://react-spring.io/hooks/use-transition) this hook constructs a function according to first input parameter on each render:
+  - If first-time-render (mounted) return function to _animate-IN_ the element.
+  - On re-render if Old input same as new input, do nothing it's just parent component re-render
+  - If Old input different from new input, return function to _animate-OUT_ existing element and _animate-IN_ new element if any.
+- After _animate-OUT_ the parent component will re-render and destroy animating-out element.
+
+- [My project using react-spring](https://github.com/ketan-10/emoji-rain/blob/master/src/components/FloatingIcons.tsx)
+
 **Miscellaneous**
-
-- [How to prevent scrollbar from repositioning web page?](https://stackoverflow.com/a/60383125/10066692)
-
-- [How to remove blue highlight when you hold on input buttons in css?](https://stackoverflow.com/questions/35832150/how-to-remove-blue-highlight-when-you-hold-on-input-buttons-in-css)

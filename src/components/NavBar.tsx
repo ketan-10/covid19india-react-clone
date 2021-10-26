@@ -2,7 +2,14 @@ import React, { useState, useCallback } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useLockBodyScroll, usePageLeave, useWindowSize } from 'react-use';
 import { Book, HelpCircle, Home, Moon, Sun, Users } from 'react-feather';
+import { useTransition, animated } from 'react-spring';
 import { Page } from '../types/Types';
+import {
+  NAVBAR_SLID_IN,
+  NAVBAR_SLID_OUT,
+  NAVBAR_SLID_IN_MOBILE,
+  NAVBAR_SLID_OUT_MOBILE,
+} from '../animations';
 
 interface NavBarProps {
   pages: Array<Page>;
@@ -27,7 +34,20 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
     [setIsOpen, isOpen]
   );
 
-  console.log('re-rendering.... NavBar');
+  const navbarTransition = useTransition(isOpen, {
+    ...(windowSize.width < 768
+      ? {
+          from: NAVBAR_SLID_IN_MOBILE,
+          enter: NAVBAR_SLID_OUT_MOBILE,
+          leave: NAVBAR_SLID_IN_MOBILE,
+        }
+      : {
+          from: NAVBAR_SLID_IN,
+          enter: NAVBAR_SLID_OUT,
+          leave: NAVBAR_SLID_IN,
+        }),
+    config: { mass: 1, tension: 210, friction: 26 },
+  });
 
   return (
     <div className="navbar">
@@ -47,9 +67,10 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
             onClick: toggleMenu,
           })}
         >
-          {windowSize.width < 769 ? (
+          {windowSize.width < 769 ? ( // MOBILE
             <span>{!isOpen ? 'Menu' : 'Close'}</span>
           ) : (
+            // DESKTOP
             <div
               className="nav-icons"
               onMouseEnter={setIsOpen.bind(null, true)}
@@ -73,13 +94,18 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
           )}
         </div>
       </div>
-      {isOpen && (
-        <Expand
-          pages={pages}
-          setIsOpen={setIsOpen}
-          windowSize={windowSize}
-          pathName={location.pathname}
-        />
+      {navbarTransition(
+        (style, item) =>
+          item && (
+            <animated.div {...{ style }} className="nav-animated-menu">
+              <Expand
+                pages={pages}
+                setIsOpen={setIsOpen}
+                windowSize={windowSize}
+                pathName={location.pathname}
+              />
+            </animated.div>
+          )
       )}
     </div>
   );
