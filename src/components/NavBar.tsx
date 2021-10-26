@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useLockBodyScroll, usePageLeave, useWindowSize } from 'react-use';
 import { Book, HelpCircle, Home, Moon, Sun, Users } from 'react-feather';
 import { useTransition, animated } from 'react-spring';
+import useDarkMode, { DarkMode } from 'use-dark-mode';
 import { Page } from '../types/Types';
 import {
   NAVBAR_SLID_IN,
@@ -33,6 +34,8 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
     },
     [setIsOpen, isOpen]
   );
+
+  const darkMode = useDarkMode(false);
 
   const navbarTransition = useTransition(isOpen, {
     ...(windowSize.width < 768
@@ -87,9 +90,9 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
               <Link to="/about">
                 <HelpCircle {...activeNavIcon(location.pathname, '/about')} />
               </Link>
-              <Link to="/">
-                <Moon />
-              </Link>
+              <a onClick={darkMode.toggle}>
+                {darkMode.value ? <Sun color="#ffc107" /> : <Moon />}
+              </a>
             </div>
           )}
         </div>
@@ -103,6 +106,7 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
                 setIsOpen={setIsOpen}
                 windowSize={windowSize}
                 pathName={location.pathname}
+                darkMode={darkMode}
               />
             </animated.div>
           )
@@ -117,12 +121,14 @@ interface ExpandProps {
   // windowSize: { width: number };
   windowSize: ReturnType<typeof useWindowSize>;
   pathName: string;
+  darkMode: DarkMode;
 }
 const Expand: React.FC<ExpandProps> = ({
   pages,
   setIsOpen,
   windowSize,
   pathName,
+  darkMode,
 }) => (
   <div
     className="navbar__menu"
@@ -143,6 +149,11 @@ const Expand: React.FC<ExpandProps> = ({
           </span>
         </Link>
       ))}
+    {windowSize.width < 769 && (
+      <a onClick={darkMode.toggle}>
+        {darkMode.value ? <Sun color="#ffc107" /> : <Moon />}
+      </a>
+    )}
     <span className="expand-bottom">A crowdsourced initiative</span>
   </div>
 );

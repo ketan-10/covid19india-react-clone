@@ -115,4 +115,12 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [My project using react-spring](https://github.com/ketan-10/emoji-rain/blob/master/src/components/FloatingIcons.tsx)
 
+**Dark Mode**
+
+- [useDarkMode stop first time flash when page loads](https://www.npmjs.com/package/use-dark-mode#that-flash)
+
+- use `useDarkMode` hook in your navbar, on toggle it adds css class `dark-mode` to `body`, we can use this class in css to change colors with `!important`
+
+- will re-render just the components where it's used, it uses [`use-persisted-state`](https://www.npmjs.com/package/use-persisted-state) to achieve this, which intern uses DOM event listeners to call others components, and share update with multiple hooks.
+
 **Miscellaneous**

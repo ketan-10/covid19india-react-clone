@@ -67,6 +67,7 @@
 
   // Dark mode variables
   --dark-m-gray: #161625;
+  --dark-m-gray-light: #1e1e30;
   --dark-mid-subtext: #bdb8ae;
   --dark-m-white: #e1e1e1;
   --dark-m-blue: #3391ff;
@@ -74,6 +75,7 @@
   --dark-m-purple-mid: #9673b9bb;
   --dark-m-purple-light: #40008050;
   --dark-m-purple-hover: #40008090;
+  --dark-m-text-color: #dbdbdb;
 }
 
 html {
@@ -133,6 +135,7 @@ h6 {
   min-height: 100vh;
 }
 
+// NAVBAR MOBILE
 .navbar {
   z-index: 9999; // navbar should be on top (top stacking context)
 
@@ -253,6 +256,7 @@ h6 {
   }
 }
 
+// NAVBAR DESKTOP
 @media (min-width: 769px) {
   .navbar {
     .navbar-container {
@@ -299,3 +303,14 @@ h6 {
     margin-left: 6rem; // escape the vertical navbar
   }
 }
+
+// DARK MODE
+.dark-mode {
+  background: var(--dark-m-gray) !important;
+  color: var(--dark-m-text-color) !important;
+
+  .navbar * {
+    background: var(--dark-m-gray-light) !important;
+  }
+}
+
