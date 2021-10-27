@@ -58,7 +58,13 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [Z-Index Stacking Context by Kevin Powell](https://youtu.be/uS8l4YRXbaw)
 
-- Side Navbar - Position:Fixed on navbar, and margin left on content.
+- Side Navbar Desktop - `Position:Fixed` on navbar, and `margin left` on content.<br>
+  For animation `left: -10rem`, Z-index stacking context as it should look coming from behind.
+
+- Side Navbar Mobile - `Position:Fixed` on navbar. <br>
+  For animation `hight:0vh` to `height:100vh`, `margin bottom` for extra height, `overflow: auto` so content does not overflow while animation.
+
+- [Cleanest way to disable CSS transition effects temporarily](https://stackoverflow.com/questions/11131875/what-is-the-cleanest-way-to-disable-css-transition-effects-temporarily/16575811#16575811)
 
 **React**
 

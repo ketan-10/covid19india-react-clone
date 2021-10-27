@@ -224,9 +224,12 @@ h6 {
         padding: 1.5rem;
         border-top: 1px solid var(--gray-light);
         border-bottom: 1px solid var(--gray-light);
+        transition: none; // remove background color change transition, If used.
 
         &:hover {
-          background: var(--pblue-hover);
+          background: var(
+            --pblue-hover
+          ); // color on hover, transparent otherwise, no need to adjust in dark-mode
         }
         .selected {
           background: var(--pblue-light);
@@ -309,8 +312,14 @@ h6 {
   background: var(--dark-m-gray) !important;
   color: var(--dark-m-text-color) !important;
 
-  .navbar * {
+  .navbar-container,
+  .navbar__menu {
     background: var(--dark-m-gray-light) !important;
   }
 }
 
+// for every background color change there will be transition, but it causes flash on start :(
+// body,
+// body * {
+//   transition: background 200ms linear;
+// }
