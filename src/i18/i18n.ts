@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { BASE_URL } from '../Constants';
 
 i18n
   .use(Backend) // what strategy should be used to get the translations.
@@ -13,7 +14,7 @@ i18n
     returnEmptyString: false, // rejects  empty string as valid translation
     load: 'languageOnly', // strategy to define which language codes to lookup.
     backend: {
-      loadPath: '/api/locales/locale_{{lng}}.json', // path where resources get loaded from.
+      loadPath: `${BASE_URL}api/locales/locale_{{lng}}.json`, // path where resources get loaded from.
     },
     fallbackLng: 'english',
     interpolation: {

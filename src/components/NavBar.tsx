@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLockBodyScroll, usePageLeave, useWindowSize } from 'react-use';
 import { Book, HelpCircle, Home, Moon, Sun, Users } from 'react-feather';
 import { useTransition, animated } from 'react-spring';

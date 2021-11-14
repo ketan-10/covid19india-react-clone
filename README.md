@@ -46,6 +46,8 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [REACT MEMO vs USECALLBACK vs USEMEMO](https://youtu.be/uojLJFt9SzY)
 
+- [When should you NOT use React memo?](https://stackoverflow.com/questions/53074551/when-should-you-not-use-react-memo)
+
 **CSS**
 
 - [How to host your own fonts made simple](https://youtu.be/KzqQXDbDvus)
@@ -191,5 +193,7 @@ const use = (module) => {
 - With i18next App component is wrapped with `Suspense` component. : [A React component suspended while rendering, but no fallback UI was specified](https://stackoverflow.com/questions/54432861/a-react-component-suspended-while-rendering-but-no-fallback-ui-was-specified)
 
 - [Lazy loading (and preloading) components in React 16.6](https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d)
+
+- Future of Suspense [Data Fetching With Suspense In Relay | Joe Savona](https://youtu.be/Tl0S7QkxFE4)
 
 **Miscellaneous**
