@@ -261,6 +261,9 @@ h6 {
 
 // NAVBAR DESKTOP
 @media (min-width: 769px) {
+  .app {
+    margin-left: 6rem; // escape the vertical navbar
+  }
   .navbar {
     .navbar-container {
       background: var(--gray-light-opaque);
@@ -268,6 +271,8 @@ h6 {
       height: 100vh;
       width: 6rem;
       position: fixed;
+      top: 0;
+      left: 0;
       align-items: center;
       text-align: center;
 
@@ -287,6 +292,7 @@ h6 {
     .nav-animated-menu {
       .navbar__menu {
         position: fixed;
+        top: 0;
         width: 15rem;
         padding-top: calc(0.625rem * 2.3 + 4rem);
 
@@ -303,7 +309,73 @@ h6 {
     }
   }
   .page {
-    margin-left: 6rem; // escape the vertical navbar
+    // margin-left: 6rem; // escape the vertical navbar
+  }
+}
+
+// language switcher
+
+.ls-container {
+  // overflow: auto;
+  // box-sizing: content-box;
+  width: 90%;
+  max-width: 35em;
+  // border: 5px solid var(--red);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 0px;
+
+  p {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--blue);
+  }
+
+  .ls-arrow {
+    // font-weight: ;
+    color: var(--blue-mid);
+    background: var(--pblue-light);
+    padding: 1rem;
+    border-radius: 50%;
+    // font-weight: 400;
+    // box-sizing: content-box; <- https://stackoverflow.com/questions/24626908/how-to-get-rid-of-extra-space-below-svg-in-div-element
+    // height: 0;
+    // width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: var(--pblue-hover);
+    }
+  }
+  .ls-list {
+    color: var(--blue-mid);
+    font-weight: 600;
+
+    margin: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    // align-items: center;
+
+    .ls-languages {
+      padding: 1.2em;
+      cursor: pointer;
+      // border: 1px solid transparent;
+
+      &:hover {
+        // border: 1px solid var(--blue);
+        color: var(--blue);
+      }
+    }
+    .ls-active {
+      background: var(--pblue-light);
+      border-radius: 5px;
+      color: var(--blue);
+    }
   }
 }
 

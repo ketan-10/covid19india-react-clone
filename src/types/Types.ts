@@ -4,3 +4,7 @@ export type Page = {
   displayName: string;
   showInNavbar: boolean;
 };
+
+export interface DomEvent extends Event {
+  target: HTMLElement;
+}

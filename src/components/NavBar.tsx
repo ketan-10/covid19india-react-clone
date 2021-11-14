@@ -4,7 +4,9 @@ import { useLockBodyScroll, usePageLeave, useWindowSize } from 'react-use';
 import { Book, HelpCircle, Home, Moon, Sun, Users } from 'react-feather';
 import { useTransition, animated } from 'react-spring';
 import useDarkMode, { DarkMode } from 'use-dark-mode';
+import { useTranslation } from 'react-i18next';
 import { Page } from '../types/Types';
+import locales from '../i18/locales';
 import {
   NAVBAR_SLID_IN,
   NAVBAR_SLID_OUT,
@@ -14,9 +16,10 @@ import {
 
 interface NavBarProps {
   pages: Array<Page>;
+  setShowLanguageSwitcher: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ pages }) => {
+const NavBar: React.FC<NavBarProps> = ({ pages, setShowLanguageSwitcher }) => {
   const [isOpen, setIsOpen] = useState(false);
   useLockBodyScroll(isOpen);
   // const history = useHistory(); // does not re-render on route change
@@ -35,7 +38,19 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
     [setIsOpen, isOpen]
   );
 
+  const toggleLanguageSwitcher = useCallback(
+    (_) => {
+      setShowLanguageSwitcher((isShow) => !isShow);
+    },
+    [setShowLanguageSwitcher]
+  );
+
   const darkMode = useDarkMode(false);
+
+  const { t, i18n } = useTranslation();
+  const currentLanguage = Object.keys(locales).includes(i18n.language)
+    ? i18n.language
+    : (i18n.options.fallbackLng as string[])[0];
 
   const navbarTransition = useTransition(isOpen, {
     ...(windowSize.width < 768
@@ -55,8 +70,8 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <div className="navbar__left" onClick={toggleMenu}>
-          English
+        <div className="navbar__left" onClick={toggleLanguageSwitcher}>
+          {locales[currentLanguage]}
         </div>
         <div className="navbar__middle">
           <Link to="/">
@@ -71,7 +86,7 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
           })}
         >
           {windowSize.width < 769 ? ( // MOBILE
-            <span>{!isOpen ? 'Menu' : 'Close'}</span>
+            <span>{!isOpen ? t('Menu') : t('Close')}</span>
           ) : (
             // DESKTOP
             <div
@@ -102,11 +117,8 @@ const NavBar: React.FC<NavBarProps> = ({ pages }) => {
           item && (
             <animated.div {...{ style }} className="nav-animated-menu">
               <Expand
-                pages={pages}
-                setIsOpen={setIsOpen}
-                windowSize={windowSize}
+                {...{ pages, setIsOpen, windowSize, darkMode }}
                 pathName={location.pathname}
-                darkMode={darkMode}
               />
             </animated.div>
           )
@@ -129,34 +141,37 @@ const Expand: React.FC<ExpandProps> = ({
   windowSize,
   pathName,
   darkMode,
-}) => (
-  <div
-    className="navbar__menu"
-    {...(windowSize.width >= 769 && {
-      onMouseLeave: setIsOpen.bind(null, false),
-    })}
-  >
-    {pages
-      .filter((p) => p.showInNavbar)
-      .map((page) => (
-        <Link
-          key={page.displayName}
-          to={page.pageLink}
-          onClick={() => setIsOpen(false)}
-        >
-          <span className={pathName === page.pageLink ? 'selected' : ''}>
-            {page.displayName}
-          </span>
-        </Link>
-      ))}
-    {windowSize.width < 769 && (
-      <a onClick={darkMode.toggle}>
-        {darkMode.value ? <Sun color="#ffc107" /> : <Moon />}
-      </a>
-    )}
-    <span className="expand-bottom">A crowdsourced initiative</span>
-  </div>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <div
+      className="navbar__menu"
+      {...(windowSize.width >= 769 && {
+        onMouseLeave: setIsOpen.bind(null, false),
+      })}
+    >
+      {pages
+        .filter((p) => p.showInNavbar)
+        .map((page) => (
+          <Link
+            key={page.displayName}
+            to={page.pageLink}
+            onClick={() => setIsOpen(false)}
+          >
+            <span className={pathName === page.pageLink ? 'selected' : ''}>
+              {t(page.displayName)}
+            </span>
+          </Link>
+        ))}
+      {windowSize.width < 769 && (
+        <a onClick={darkMode.toggle}>
+          {darkMode.value ? <Sun color="#ffc107" /> : <Moon />}
+        </a>
+      )}
+      <span className="expand-bottom">{t('A crowdsourced initiative.')}</span>
+    </div>
+  );
+};
 
 export default NavBar;
 

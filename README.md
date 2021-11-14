@@ -66,6 +66,8 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [Cleanest way to disable CSS transition effects temporarily](https://stackoverflow.com/questions/11131875/what-is-the-cleanest-way-to-disable-css-transition-effects-temporarily/16575811#16575811)
 
+- Non Block elements like img, svg have default space in bottom as they were used to show text and some characters like 'g', 'y' go bellow text-baseline. [We have to remove that](https://stackoverflow.com/questions/24626908/how-to-get-rid-of-extra-space-below-svg-in-div-element).
+
 **React**
 
 - [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
@@ -128,5 +130,66 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - use `useDarkMode` hook in your navbar, on toggle it adds css class `dark-mode` to `body`, we can use this class in css to change colors with `!important`
 
 - will re-render just the components where it's used, it uses [`use-persisted-state`](https://www.npmjs.com/package/use-persisted-state) to achieve this, which intern uses DOM event listeners to call others components, and share update with multiple hooks.
+
+**i18next**
+
+- [Localise React Applications Using I18Next](https://youtu.be/txHU6lrsa3o)
+
+- Configurations:
+
+  - List of i18next [Configuration Options](https://www.i18next.com/overview/configuration-options)
+  - http-backend [Configurations](https://github.com/i18next/i18next-http-backend)
+
+- i18next works with plugins to support multiple frameworks, data sources types and language detections. <br>
+  Code from [`i18next.js`](https://github.com/i18next/i18next/blob/master/src/i18next.js)
+
+```js
+const use = (module) => {
+  if (module.type === 'backend') {
+    this.modules.backend = module;
+  }
+
+  if (module.type === 'logger' || (module.log && module.warn && module.error)) {
+    this.modules.logger = module;
+  }
+
+  if (module.type === 'languageDetector') {
+    this.modules.languageDetector = module;
+  }
+
+  if (module.type === 'i18nFormat') {
+    this.modules.i18nFormat = module;
+  }
+
+  if (module.type === 'postProcessor') {
+    postProcessor.addPostProcessor(module);
+  }
+
+  if (module.type === '3rdParty') {
+    this.modules.external.push(module);
+  }
+
+  return this;
+};
+```
+
+- [Backend](https://www.i18next.com/overview/plugins-and-utils#backends) : how to fetch the translations from a server or file. <br> We can also specify multiple backends for fallback.
+
+- [Language Detector](https://www.i18next.com/overview/plugins-and-utils#language-detector) : how to detect current language <br> Considers client location, cookies and query string.
+
+- i18next provides functionality to register a callback to be called when the language changes. <br>
+  But we want to re-render react components on language change, and want to use easy hooks to do that. <br>
+  For that we use [i18next-react](https://react.i18next.com/guides/quick-start) a plugin categorized in `3rdParty` plugin.
+
+  > by `i18n.use(initReactI18next)` we pass the i18n instance to react-i18next<br> which will make it available for all the components via the context api.
+
+- i18next-react uses context API to pass the i18n configurations to the i18next form component and vice versa. But we have used `locales.ts` file for that.<br>
+  To Detect changes for re-render i18next-react uses `useTranslation` hook which will internally registers the current hook to `i18n.on('languageChanged', (t) => setT(t))`.
+
+**Suspense**
+
+- With i18next App component is wrapped with `Suspense` component. : [A React component suspended while rendering, but no fallback UI was specified](https://stackoverflow.com/questions/54432861/a-react-component-suspended-while-rendering-but-no-fallback-ui-was-specified)
+
+- [Lazy loading (and preloading) components in React 16.6](https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d)
 
 **Miscellaneous**

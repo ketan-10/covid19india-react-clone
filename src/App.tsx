@@ -9,8 +9,10 @@ import {
 import NavBar from './components/NavBar';
 import { Page } from './types/Types';
 import { BASE_URL } from './Constants';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 const App: React.FC = () => {
+  const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
   const pages: Array<Page> = [
     {
       pageLink: '/',
@@ -46,7 +48,13 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <Router basename={BASE_URL}>
-        <NavBar pages={pages} />
+        <LanguageSwitcher
+          {...{ showLanguageSwitcher, setShowLanguageSwitcher }}
+        />
+        <NavBar
+          pages={pages}
+          setShowLanguageSwitcher={setShowLanguageSwitcher}
+        />
         <div className="page">
           <Switch>
             {pages.map((page) => (
