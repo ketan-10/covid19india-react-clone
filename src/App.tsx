@@ -1,5 +1,5 @@
 import './App.scss';
-import React, { useState, lazy } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -53,9 +53,12 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <Router basename={BASE_URL}>
-        <LanguageSwitcher
-          {...{ showLanguageSwitcher, setShowLanguageSwitcher }}
-        />
+        <Suspense fallback={<div />}>
+          <LanguageSwitcher
+            {...{ showLanguageSwitcher, setShowLanguageSwitcher }}
+          />
+        </Suspense>
+
         <NavBar
           pages={pages}
           setShowLanguageSwitcher={setShowLanguageSwitcher}
