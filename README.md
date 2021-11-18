@@ -70,6 +70,14 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - Non Block elements like img, svg have default space in bottom as they were used to show text and some characters like 'g', 'y' go bellow text-baseline. [We have to remove that](https://stackoverflow.com/questions/24626908/how-to-get-rid-of-extra-space-below-svg-in-div-element).
 
+- Transition vs Animation:
+  - `transition` requires some trigger like `:hover`
+  - `animation` can self start.
+  - `transition` binds to a specific css attribute which can animate like `opacity` or `transform`
+    <br> So whenever that field is changed by trigger or by addition or removal of some css class from javascript, it will be automatically animated from old to new value, after css parsing is completed.
+  - `transition` have only 2 state where as `animation` can have any number of `keyframes`
+  - [How to play an animation on hover and pause when hover is not active](https://stackoverflow.com/questions/38888453/how-to-play-an-animation-on-hover-and-pause-when-hover-is-not-active)
+
 **React**
 
 - [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
