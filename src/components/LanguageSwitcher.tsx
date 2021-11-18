@@ -3,6 +3,7 @@ import { ArrowUp } from 'react-feather';
 import { useTransition, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { useClickAway } from 'react-use';
+import classnames from 'classnames';
 import locales from '../i18/locales';
 import { DomEvent } from '../types/Types';
 
@@ -50,9 +51,12 @@ const LanguageSwitcher: React.FC<Props> = ({
             {Object.keys(locales).map((languageKey) => (
               <div
                 key={languageKey}
-                className={`ls-languages ${
-                  i18n.language === languageKey ? 'ls-active ' : ''
-                }`}
+                // className={`ls-languages ${
+                //   i18n.language === languageKey ? 'ls-active ' : ''
+                // }`}
+                className={classnames('ls-languages', {
+                  'ls-active': i18n.language === languageKey,
+                })}
                 onClick={() => {
                   i18n.changeLanguage(languageKey);
                   setShowLanguageSwitcher(false);

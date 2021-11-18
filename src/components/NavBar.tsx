@@ -67,8 +67,14 @@ const NavBar: React.FC<NavBarProps> = ({ pages, setShowLanguageSwitcher }) => {
     config: { mass: 1, tension: 210, friction: 26 },
   });
 
-  return (
-    <div className="navbar">
+  const loadingAnimation = useTransition(true, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
+
+  return loadingAnimation((style) => (
+    <animated.div className="navbar" {...{ style }}>
       <div className="navbar-container">
         <div className="navbar__left" onClick={toggleLanguageSwitcher}>
           {locales[currentLanguage]}
@@ -123,8 +129,8 @@ const NavBar: React.FC<NavBarProps> = ({ pages, setShowLanguageSwitcher }) => {
             </animated.div>
           )
       )}
-    </div>
-  );
+    </animated.div>
+  ));
 };
 
 interface ExpandProps {

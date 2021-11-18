@@ -9,7 +9,7 @@ i18n
   .use(LanguageDetector) // used to detect current language
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
-    debug: true,
+    debug: false,
     keySeparator: false, // char to separate keys. If working with a flat JSON, it's recommended to set this to false.
     returnEmptyString: false, // rejects  empty string as valid translation
     load: 'languageOnly', // strategy to define which language codes to lookup.
