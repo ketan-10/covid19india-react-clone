@@ -197,3 +197,5 @@ const use = (module) => {
 - Future of Suspense [Data Fetching With Suspense In Relay | Joe Savona](https://youtu.be/Tl0S7QkxFE4)
 
 **Miscellaneous**
+
+- [Retry Promise](https://github.com/ketan-10/Testing/blob/master/coroutine-async-await/retry-promise.js)

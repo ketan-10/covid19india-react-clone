@@ -1,5 +1,5 @@
 import './App.scss';
-import React, { useState } from 'react';
+import React, { useState, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -9,7 +9,12 @@ import {
 import NavBar from './components/NavBar';
 import { Page } from './types/Types';
 import { BASE_URL } from './Constants';
-import LanguageSwitcher from './components/LanguageSwitcher';
+import { retry } from './utils/commonFunctions';
+// import LanguageSwitcher from './components/LanguageSwitcher';
+
+const LanguageSwitcher = lazy(() =>
+  retry(() => import('./components/LanguageSwitcher'))
+);
 
 const App: React.FC = () => {
   const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
