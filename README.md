@@ -128,9 +128,43 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - So all this is handled by [`useTransition`](https://react-spring.io/hooks/use-transition) this hook constructs a function according to first input parameter on each render:
   - If first-time-render (mounted) return function to _animate-IN_ the element.
   - On re-render if Old input same as new input, do nothing it's just parent component re-render
-  - If Old input different from new input, return function to _animate-OUT_ existing element and _animate-IN_ new element if any.
+  - If Old input different from new input, return function to _animate-OUT_ existing element and _animate-IN_ new element if any.<br>
+    `useRef` is used to store the previous _animate-OUT_ components.
 - After _animate-OUT_ the parent component will re-render and destroy animating-out element.
+- useTransition hooks job is **not** to actually render the animation, but it is as follows:
 
+  - The first input parameter convert it into an array if not already(will discuss next) <br>
+    [and save it in useRef for later use.](https://github.com/pmndrs/react-spring/blob/master/packages/core/src/hooks/useTransition.tsx#L97) save it inside `useLayoutEffect` so it's saved when the function is complete, i.e at end. (like defer in golang)
+  - Check the previous value of first input parameter. it there add it to the `transition` array with `TransitionPhase.LEAVE`.
+  - There are following transition-phases:
+    - `TransitionPhase.ENTER`
+    - `TransitionPhase.LEAVE`
+    - `TransitionPhase.UPDATE`
+    - `TransitionPhase.UNMOUNT`
+  - Read the second input, which is configuration object, and calculate animation object from that(using physics 😄)
+  - With the animation object of new and old element data (`TransitionPhase.ENTER` and `TransitionPhase.LEAVE`) <br>
+    and actual new and old data, stored in array call the [`renderTransitions` function](https://github.com/pmndrs/react-spring/blob/master/packages/core/src/hooks/useTransition.tsx#L356) two times, for both old and new element. <br>
+  - If the first input value has not changed. Due to component re-render for another update or first time render.<br>
+    It will be just one (same) element. so useTransition will not detect any changes. <br>
+    and the animation object will have no animations.
+
+- animation object created by `useTransition` is only understood by `animated.<div|h1|p|...>` component. <br>
+  and it can even be used multiple times inside the function.
+- `animated` component `does not re-render the react-component` while animating. <br>
+  It uses something called [`react forwardRef`](https://reactjs.org/docs/forwarding-refs.html) <br>
+  to set/update css style value directly by bypassing react renderer. [withAnimated source-code](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L25) <br>
+
+- Use Transition for Array of Elements:
+  - If we have `n-number` of animation targets. Like in this case we have array of `Volunteers` to animate. <br>
+    They could be added or removed.
+  - We have to make sure we don't just un-mount the removed element from the array. <br>
+    As this will mean no _transition-out_ animation.
+  - So `useTransition` supports animate the array of elements. <br>
+    We pass the data array to the useTransition first parameter and also pass the key to identify the element. <br>
+    Now `useTransition` determine using key and pervious-input (from use-ref), if the element is new or old. <br>
+    and determine the transition-phase for each-data(element) in the array. <br>
+  - For each data(element) the function is called with style(animation-object) and element-data from the array.
+  - [Volunteers Github Gist](https://gist.github.com/ketan-10/81977644846fed3d31596d33fd928487)
 - [My project using react-spring](https://github.com/ketan-10/emoji-rain/blob/master/src/components/FloatingIcons.tsx)
 
 **Dark Mode**
@@ -203,6 +237,17 @@ const use = (module) => {
 - [Lazy loading (and preloading) components in React 16.6](https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d)
 
 - Future of Suspense [Data Fetching With Suspense In Relay | Joe Savona](https://youtu.be/Tl0S7QkxFE4)
+
+- [Suspense with SWR](https://swr.vercel.app/docs/suspense)
+
+- TODO: experimental will be useless/updated in react18 [Concurrent UI Patterns](https://reactjs.org/docs/concurrent-mode-patterns.html)
+
+**Data Fetching**
+
+- [SWR](https://swr.vercel.app/) (_state-with-rehydration_) is a data data fetching and caching library which uses `cache invalidation` strategy. <br>
+  SWR first returns the data from cache (stale), then sends the request (revalidate), and finally comes with the up-to-date data again.
+
+- When link change keep the old result and don't return undefine: [Keep previous result while revalidating](https://github.com/vercel/swr/issues/192)
 
 **Miscellaneous**
 

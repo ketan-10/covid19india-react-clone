@@ -129,6 +129,61 @@ h6 {
   font-weight: 600;
 }
 
+.github {
+  color: #6c757dbb;
+
+  &:hover {
+    color: var(--gray);
+  }
+}
+
+.linkedin {
+  color: var(--blue-mid);
+
+  &:hover {
+    color: var(--blue);
+  }
+}
+
+.instagram {
+  color: var(--pink-mid);
+
+  &:hover {
+    color: var(--pink);
+  }
+}
+
+.twitter {
+  color: var(--pblue-mid);
+
+  &:hover {
+    color: var(--pblue);
+  }
+}
+
+.mail {
+  color: var(--brown-mid);
+
+  &:hover {
+    color: var(--brown);
+  }
+}
+.send {
+  color: var(--blue-mid);
+
+  &:hover {
+    color: var(--blue);
+  }
+}
+
+.database {
+  color: var(--yellow-mid);
+
+  &:hover {
+    color: var(--yellow);
+  }
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -253,66 +308,6 @@ h6 {
   }
 }
 
-@media (max-width: 768px) {
-  .navbar__menu {
-    overflow: auto; // so content does not overflow while animation!!!
-  }
-}
-
-// NAVBAR DESKTOP
-@media (min-width: 769px) {
-  .app {
-    margin-left: 6rem; // escape the vertical navbar
-  }
-  .navbar {
-    .navbar-container {
-      background: var(--gray-light-opaque);
-      flex-direction: column;
-      height: 100vh;
-      width: 6rem;
-      position: fixed;
-      top: 0;
-      left: 0;
-      align-items: center;
-      text-align: center;
-
-      .navbar__left {
-        order: 3;
-        margin-top: auto;
-      }
-      .navbar__middle {
-        font-size: 0.625rem;
-        width: 4rem;
-        padding: 2rem 0; // padding should be em not rem, as it can grow/shrink if font-size of current element is overwritten by higher priority class eg inline css. but I don't want to get into that 😁
-      }
-      .navbar__right {
-        width: 100%; //
-      }
-    }
-    .nav-animated-menu {
-      .navbar__menu {
-        position: fixed;
-        top: 0;
-        width: 15rem;
-        padding-top: calc(0.625rem * 2.3 + 4rem);
-
-        a {
-          border: 0 !important;
-          font-weight: 600;
-        }
-
-        .expand-bottom {
-          margin-bottom: 0; // to eliminate the extra gap of 100vh navbar
-          margin-top: 0; // don't auto flow to bottom
-        }
-      }
-    }
-  }
-  // .page {
-  //   margin-left: 6rem; // escape the vertical navbar
-  // }
-}
-
 // language switcher
 
 .ls-container {
@@ -379,16 +374,221 @@ h6 {
   }
 }
 
+// Volunteers
+.volunteers {
+  width: calc(100% - 2rem);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > p {
+    // margin: 0 auto;
+    color: var(--blue);
+    background-color: var(--blue-light);
+    padding: 1rem;
+    border-radius: 0.3rem;
+    font-size: 0.9rem;
+    // text-align: ;
+    text-align: justify;
+    text-justify: inter-word; // https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
+
+    margin: 3rem 0;
+  }
+
+  .volunteers__container {
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+
+    .volunteers__container__item {
+      height: calc(75px + 2rem);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem;
+      // border: 1px solid var(--gray);
+      background: var(--gray-light-opaque);
+
+      .volunteers__container__item__image {
+        height: 100%; // this is needed as image will make the container overflow.
+        width: 75px;
+        img {
+          height: 100%;
+          object-fit: contain;
+          display: block;
+          border-radius: 0.5rem;
+        }
+
+        svg {
+          width: 100%;
+          height: 100%;
+          display: block;
+          border-radius: 0.5rem;
+        }
+      }
+
+      .volunteers__container__item__details {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        height: 100%;
+        overflow: hidden;
+        h2 {
+          color: var(--gray);
+          // font-size: 1rem;
+          margin: 0;
+          font-weight: 600;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        p {
+          color: var(--blue);
+          margin: 0;
+          font-size: 0.7rem;
+          padding: 0.3rem 0;
+        }
+
+        .volunteers__container__item__details__socials {
+          display: flex;
+          line-height: 1.5rem;
+          margin: 0;
+          margin-top: auto;
+          gap: 0.5rem;
+
+          a {
+            margin: 0;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+              color: var(--blue-hover);
+            }
+
+            svg {
+              margin: 0;
+            }
+          }
+
+          .icon {
+            pointer-events: all;
+          }
+
+          svg {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+    .last {
+      position: relative;
+      padding: 0;
+      .volunteers__container__item {
+        width: 70%;
+        position: absolute;
+        &:nth-child(2) {
+          background-color: white;
+          left: 15%;
+        }
+        &:nth-child(3) {
+          left: 30%;
+        }
+      }
+    }
+  }
+}
+
+.banner {
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  background: var(--red-light);
+  color: var(--red);
+  font-weight: 600;
+
+  svg {
+    min-width: fit-content; // so that flex will not shrink the svg
+    // also could have been solved by wrapping avg in div.
+  }
+
+  p {
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    background: var(--red-light);
+
+    &:hover {
+      background: var(--red-hover);
+    }
+    svg {
+      vertical-align: text-bottom;
+    }
+  }
+}
+
+// footer
+footer {
+  // all centering together 😄
+  align-self: center; // for centering self in flex container
+  text-align: center; // text will be centered
+  align-items: center; // all child will be centered
+
+  padding: 4rem 0;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  .footer__title {
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--blue);
+    background-color: var(--blue-light);
+  }
+
+  h5 {
+    margin: 0;
+    color: var(--gray);
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem;
+  }
+}
+
+/*************************************************************************************************/
+
 // DARK MODE
 .dark-mode {
   background: var(--dark-m-gray) !important;
   color: var(--dark-m-text-color) !important;
 
   .navbar-container,
-  .navbar__menu {
+  .navbar__menu,
+  .volunteers__container__item {
     background: var(--dark-m-gray-light) !important;
   }
+
+  .last {
+    .volunteers__container__item {
+      &:nth-child(2) {
+        background-color: var(--dark-m-gray) !important;
+      }
+    }
+  }
 }
+
+/*************************************************************************************************/
 
 // for every background color change there will be transition, but it causes flash on start :(
 // body,
@@ -396,6 +596,7 @@ h6 {
 //   transition: background 200ms linear;
 // }
 
+// animations
 .fadeInAnimation {
   animation: fadeInAnimation 0.5s;
 }
@@ -407,4 +608,113 @@ h6 {
   to {
     opacity: 1;
   }
+}
+
+.fadeInDownAnimation {
+  animation: fadeInDownAnimation 0.5s;
+}
+
+@keyframes fadeInDownAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUpAnimation {
+  animation: fadeInUpAnimation 0.5s;
+}
+
+@keyframes fadeInUpAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
+
+/*************************************************************************************************/
+
+// Media Queries.
+@media (max-width: 768px) {
+  .navbar__menu {
+    overflow: auto; // so content does not overflow while animation!!!
+  }
+}
+
+// NAVBAR DESKTOP
+@media (min-width: 769px) {
+  .app {
+    margin-left: 6rem; // escape the vertical navbar
+    margin-right: 1rem; // escape the scroll bar -> as html width is set to 100vw to avoid repositioning.
+  }
+  .navbar {
+    .navbar-container {
+      background: var(--gray-light-opaque);
+      flex-direction: column;
+      height: 100vh;
+      width: 6rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      align-items: center;
+      text-align: center;
+
+      .navbar__left {
+        order: 3;
+        margin-top: auto;
+      }
+      .navbar__middle {
+        font-size: 0.625rem;
+        width: 4rem;
+        padding: 2rem 0; // padding should be em not rem, as it can grow/shrink if font-size of current element is overwritten by higher priority class eg inline css. but I don't want to get into that 😁
+      }
+      .navbar__right {
+        width: 100%; //
+      }
+    }
+    .nav-animated-menu {
+      .navbar__menu {
+        position: fixed;
+        top: 0;
+        width: 15rem;
+        padding-top: calc(0.625rem * 2.3 + 4rem);
+
+        a {
+          border: 0 !important;
+          font-weight: 600;
+        }
+
+        .expand-bottom {
+          margin-bottom: 0; // to eliminate the extra gap of 100vh navbar
+          margin-top: 0; // don't auto flow to bottom
+        }
+      }
+    }
+  }
+  .banner {
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-right: -1rem; // https://stackoverflow.com/questions/4280886/can-a-background-image-be-larger-than-the-div-itself
+    padding-right: 1rem;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .volunteers {
+    width: 80%;
+  }
+  // .page {
+  //   margin-left: 6rem; // escape the vertical navbar
+  // }
 }
