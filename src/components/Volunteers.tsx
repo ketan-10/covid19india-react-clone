@@ -1,5 +1,5 @@
 import { useTransition, animated } from 'react-spring';
-import React from 'react';
+import React, { memo } from 'react';
 import ContentLoader from 'react-content-loader';
 import useSWR from 'swr';
 import { GitHub, Instagram, Linkedin, Twitter } from 'react-feather';
@@ -129,4 +129,4 @@ const Volunteers: React.FC = () => {
   );
 };
 
-export default Volunteers;
+export default memo(Volunteers);
