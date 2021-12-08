@@ -91,6 +91,10 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
   - Though we have `align-content` property with `flex-wrap` to control all rows as a complete content.
   - In `Grid` we have `justify-item` property as in grid unlike flex columns also lineup perfectly.
 
+| Justify     | Align       |
+| ----------- | ----------- |
+| ![1](https://user-images.githubusercontent.com/35309821/145279500-bf5dedf9-3438-4155-aaee-1a2b066ad60b.png) |![2](https://user-images.githubusercontent.com/35309821/145279542-f791c906-2328-403f-87c6-71f41632c390.png) |
+
 **React**
 
 - [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
