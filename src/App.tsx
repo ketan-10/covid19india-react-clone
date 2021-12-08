@@ -15,24 +15,32 @@ import Banner from './components/Banner';
 
 // lazy and retry take function as argument instead of promise, as they can initiate the promise.
 const Volunteers = lazy(() => retry(() => import('./components/Volunteers')));
+const Main = lazy(() => retry(() => import('./components/Main')));
 
 // import LanguageSwitcher from './components/LanguageSwitcher';
 const LanguageSwitcher = lazy(() =>
   retry(() => import('./components/LanguageSwitcher'))
 );
 
+const About = () => {
+  window.location.replace(
+    'https://ketan-10.github.io/markdown-printer/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fketan-10%2Fcovid19india-react-clone%2Fmaster%2FREADME.md'
+  );
+  return <></>;
+};
+
 const App: React.FC = () => {
   const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
   const pages: Array<Page> = [
     {
       pageLink: '/',
-      view: <>Main</>,
+      view: <Main />,
       displayName: 'Home',
       showInNavbar: true,
     },
     {
       pageLink: '/blog',
-      view: <>Blog</>,
+      view: <Volunteers />,
       displayName: 'Blog',
       showInNavbar: true,
     },
@@ -44,7 +52,7 @@ const App: React.FC = () => {
     },
     {
       pageLink: '/about',
-      view: <>About</>,
+      view: <About />,
       displayName: 'About',
       showInNavbar: true,
     },

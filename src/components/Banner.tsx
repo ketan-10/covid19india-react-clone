@@ -5,11 +5,14 @@ const Banner: React.FC = () => (
   <div className="banner fadeInDownAnimation">
     <AlertTriangle size={16} />
     <p>
-      After 18 months of daily updates, we stopped our operations on 31st
-      October, 2021. You can only view data from January 2020 to October 2021 on
-      this website.
+      (Work in progress 🚧) A complete rewrite of covid19india.org using
+      Typescript and few other changes.
     </p>
-    <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
+    <a
+      href="https://github.com/ketan-10/covid19india-react-clone"
+      target="_blank"
+      rel="noreferrer"
+    >
       Read more
       <ArrowRight size={16} />
     </a>

@@ -566,6 +566,116 @@ footer {
   }
 }
 
+// *************************************************************************************************
+// re-write needed!!!
+.main {
+  .map-container {
+    display: flex;
+    justify-content: center;
+    margin: 4rem 0;
+  }
+
+  width: calc(100% - 2rem);
+  margin: 1rem auto;
+  .table {
+    display: grid;
+    // grid-template-columns: repeat(var(--columns), max-content);
+    grid-template-columns: repeat(var(--columns), min-content);
+    gap: 0.25rem;
+    color: var(--gray);
+    max-width: 100vw;
+    overflow-x: auto;
+    font-size: 0.8125rem;
+
+    .row {
+      display: contents;
+
+      .cell {
+        // background: var(--dark-m-gray);
+        display: flex;
+        flex-direction: column;
+        border-radius: 3px;
+        padding: 0.4rem;
+      }
+
+      // top row
+      &.row--header {
+        .cell--statistic {
+          cursor: pointer;
+          position: relative;
+          padding-top: 1rem;
+          .sort-icon {
+            position: absolute;
+            top: 0.25rem;
+            right: 0.25rem;
+            line-height: 0;
+          }
+          &:not(:first-child) {
+            text-align: right;
+          }
+        }
+      }
+
+      // data row
+      &.row--detail {
+        // odd rows
+        &:nth-child(odd) {
+          .cell--detail {
+            background: var(--gray-light);
+          }
+        }
+
+        .cell--detail {
+          text-align: right;
+          justify-content: flex-end;
+          font-size: 0.875rem;
+          .delta {
+            font-size: 0.9em;
+          }
+        }
+        // state name cell
+      }
+    }
+
+    .row--header .cell:first-child,
+    .row--detail .cell--state-header {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+    }
+
+    .row--header .cell--statistic,
+    .row--detail .cell--state-header // state name cell
+    {
+      font-weight: 900;
+      background: var(--gray-light-opaque);
+      justify-content: center;
+    }
+
+    // table colors
+    .is-confirmed {
+      color: var(--cherry);
+    }
+    .is-active {
+      color: var(--blue);
+    }
+    .is-recovered {
+      color: var(--green);
+    }
+    .is-deceased {
+      color: var(--gray);
+    }
+    .is-tested {
+      color: var(--purple);
+    }
+    .is-vaccinated,
+    .is-vaccinated1,
+    .is-vaccinated2 {
+      color: var(--pink);
+    }
+  }
+}
+
 /*************************************************************************************************/
 
 // DARK MODE
@@ -575,7 +685,10 @@ footer {
 
   .navbar-container,
   .navbar__menu,
-  .volunteers__container__item {
+  .volunteers__container__item,
+  .row--header .cell--statistic,
+  .row--detail .cell--state-header // state name cell
+  {
     background: var(--dark-m-gray-light) !important;
   }
 
@@ -584,6 +697,11 @@ footer {
       &:nth-child(2) {
         background-color: var(--dark-m-gray) !important;
       }
+    }
+  }
+  .table-loader {
+    rect {
+      fill: var(--dark-m-gray-light) !important;
     }
   }
 }
@@ -638,7 +756,6 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
-  
 }
 
 /*************************************************************************************************/
@@ -711,7 +828,8 @@ footer {
     }
   }
 
-  .volunteers {
+  .volunteers,
+  .main {
     width: 80%;
   }
   // .page {

@@ -71,6 +71,7 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - Non Block elements like img, svg have default space in bottom as they were used to show text and some characters like 'g', 'y' go bellow text-baseline. [We have to remove that](https://stackoverflow.com/questions/24626908/how-to-get-rid-of-extra-space-below-svg-in-div-element).
 
 - Transition vs Animation:
+
   - `transition` requires some trigger like `:hover`
   - `animation` can self start.
   - `transition` binds to a specific css attribute which can animate like `opacity` or `transform`
@@ -78,9 +79,23 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
   - `transition` have only 2 state where as `animation` can have any number of `keyframes`
   - [How to play an animation on hover and pause when hover is not active](https://stackoverflow.com/questions/38888453/how-to-play-an-animation-on-hover-and-pause-when-hover-is-not-active)
 
+- [What is difference between justify-self, justify-items and justify-content in CSS grid?](https://stackoverflow.com/questions/48535585/what-is-difference-between-justify-self-justify-items-and-justify-content-in-cs)
+
+- Flex vs Grid:
+  - I got a 💝 form Kevin Powell : [No justify-self in Flexbox? No problem!](https://www.youtube.com/watch?v=q08BbYNG8h0&lc=z225ujzz1n2pwdnae04t1aokgqagymbaqol0d52l1yvhrk0h00410)
+  - Notice the '6' didn't got pushed up to below '1'.
+  - In flex rows align perfectly. but column does not.
+  - (side note: `flex-warp` works kind of like `grid`, <br> but you cant set something like `fr` unit or `flex-grow` in flex on vertical direction i.e on flex-wrap direction )
+  - So to wiggle the cell up and down within the row, we have `align-items` property.
+  - But as the columns don't lineup like rows do, we don't have `justify-items` property in flex
+  - Though we have `align-content` property with `flex-wrap` to control all rows as a complete content.
+  - In `Grid` we have `justify-item` property as in grid unlike flex columns also lineup perfectly.
+
 **React**
 
 - [My Findings](https://github.com/ketan-10/Testing/tree/master/react)
+
+- React useEffect can't have async function: [React Hook Warnings for async function in useEffect: useEffect function must return a cleanup function or nothing](https://stackoverflow.com/questions/53332321/react-hook-warnings-for-async-function-in-useeffect-useeffect-function-must-ret)
 
 **gh-pages with ViteJs**
 
@@ -120,6 +135,8 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 **D3.js**
 
 - [D3.js tutorial by andrew chen](https://www.youtube.com/watch?v=UYrJ4jukvig&list=PLPtgdQ4YE9cgdPwOKShhPHdVEseLPGd_t)
+
+- [My D3 Projects](https://github.com/ketan-10/Testing/tree/master/pages/d3)
 
 **Animation**
 
@@ -248,6 +265,78 @@ const use = (module) => {
   SWR first returns the data from cache (stale), then sends the request (revalidate), and finally comes with the up-to-date data again.
 
 - When link change keep the old result and don't return undefine: [Keep previous result while revalidating](https://github.com/vercel/swr/issues/192)
+
+**Position: Sticky**
+
+- About `position: sticky` by kevin powell : [A couple of cool things you can do with CSS position sticky](https://youtu.be/8TyoihVGErI)
+
+- Not work with `overflow` property set [How to fix Issues with css position sticky Not Working](https://www.designcise.com/web/tutorial/how-to-fix-issues-with-css-position-sticky-not-working)
+
+- Github issue on w3c: [[css3 positioning] support position:sticky inside an overflow:hidden|auto on general parents](https://github.com/w3c/csswg-drafts/issues/865)
+
+- Javascript solution: [Position: stuck; — and a way to fix it](https://uxdesign.cc/position-stuck-96c9f55d9526)
+
+**Typescript**
+
+- [My Typescript Notes](https://github.com/ketan-10/Testing/tree/master/Typescript)
+
+- Typescript checks are all only compile time <br>
+  It's easy to know at first glance but also easy to forget <br>
+  i.e we cant have variables in type we have to use typeof
+
+- Utility types: [Extract](https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union) <br>
+  [Custom union type](https://stackoverflow.com/questions/55773761/converting-object-to-union-type)
+
+```ts
+type ObjectUnionType<T> = T[keyof T];
+
+const one = {
+  a: 1,
+  b: 'ketan',
+  c: true,
+};
+
+const two = one as { [P in 'a' | 'c']: typeof one[P] }; // pick -> https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys
+
+// typeof two
+const two: {
+  a: number;
+  c: boolean;
+};
+
+const myVar = 'a' as keyof typeof one;
+// typeof myVar
+const myVar: 'a' | 'c' | 'b';
+
+// following are same:
+const three = one[myVar] as typeof one[keyof typeof one];
+const four = one[myVar] as ObjectUnionType<typeof one>;
+
+// typeof three
+const three: string | number | boolean;
+// typeof four
+const four: ObjectUnionType<{
+  a: number;
+  b: string;
+  c: boolean;
+}>;
+```
+
+- VS-Code show expanded type: [How can I see the full expanded contract of a Typescript type?](https://stackoverflow.com/questions/57683303/how-can-i-see-the-full-expanded-contract-of-a-typescript-type)
+
+**Reflow-Event & Critical-Rendering-Path & UseLayoutEffect - Updating the DOM element size without the flicker**
+
+- [Learn useLayoutEffect In 5 Minutes](https://www.youtube.com/watch?v=wU57kvYOxT4)
+
+- `useEffect` runs `after` DOM is rendered on the page or in parallel, <br>
+  Due to this if we `update DOM element` in useEffect there we see a `flicker` and old position is displayed for a sec.<br>
+  So `useLayoutEffect` runs before Render, so there will be no flicker. <br>
+
+- If `useLayoutEffect` runs before render. How we able to read the element size?<br>
+  [How does React measure DOM Elements in useLayoutEffect hook correctly before browser gets a chance to paint?](https://stackoverflow.com/questions/60769022/how-does-react-measure-dom-elements-in-uselayouteffect-hook-correctly-before-bro)<br>
+  Basically useLayoutEffect runs after Dom have been parsed by the browser but not rendered. <br>
+  This same Feature is used with native javascript when we update the dom layout, and then read it. <br>
+  This is called `reflow event`: [My findings on `reflow-event` and `critical-rendering-path`](https://github.com/ketan-10/Testing/tree/master/BrowserCriticalRenderingPath)
 
 **Miscellaneous**
 
