@@ -1,5 +1,8 @@
 export const BASE_URL = '/covid19india-react-clone/';
 
+// width / height
+export const MAP_DIMENSIONS = [432, 488];
+
 export const UNASSIGNED_STATE_CODE = 'UN';
 export const STATE_NAMES: {
   [stateCode: string]: string;

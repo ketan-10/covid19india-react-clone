@@ -15,7 +15,7 @@ import useSWR from 'swr';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import { Data } from '../types/Types';
-import { BASE_URL, STATE_CODES } from '../Constants';
+import { BASE_URL, STATE_CODES, MAP_DIMENSIONS } from '../Constants';
 
 // Reference Commit: https://github.com/covid19india/covid19india-react/blob/9ef4ca39173a58859996d4d8151a64c385533ca9/src/components/mapvisualizer.js
 const MapVisualizer = () => {
@@ -101,7 +101,11 @@ const MapVisualizer = () => {
   });
   return (
     <div className="map-container">
-      <svg ref={svgRef} width="432" viewBox="0 0 432 488">
+      <svg
+        ref={svgRef}
+        width={MAP_DIMENSIONS[0]}
+        viewBox={`0 0 ${MAP_DIMENSIONS[0]} ${MAP_DIMENSIONS[1]}`}
+      >
         <g className="map" />
         <g className="circle" />
       </svg>
