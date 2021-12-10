@@ -24,7 +24,6 @@ const Main: React.FC = () => (
     <Suspense fallback={<TableLoader />}>
       <Table />
     </Suspense>
-    <MapVisualizerLoader />
   </div>
 );
 
