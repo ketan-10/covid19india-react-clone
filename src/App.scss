@@ -580,6 +580,7 @@ footer {
   .table {
     display: grid;
     // grid-template-columns: repeat(var(--columns), max-content);
+    justify-content: center;
     grid-template-columns: repeat(var(--columns), min-content);
     gap: 0.25rem;
     color: var(--gray);
