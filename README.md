@@ -19,11 +19,11 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 ### Steps
 
-**eslint && vitejs** <br>
+**esbuild && vitejs** <br>
 
 - created vite app with : `yarn create vite`
 - [WTF are Babel and Webpack 😵 ? Explained in 2 mins.](https://dev.to/getd/wtf-are-babel-and-webpack-explained-in-2-mins-43be)
-   -  We are using `tsc` insted of `babel` and `eslint` insted of `webpack`
+   -  We are using `tsc` insted of `babel` and `esbuild` insted of `webpack`
 - [Let's Learn esbuild! (with Sunil Pai) — Learn With Jason](https://youtu.be/KLdF1yu_bmI)
 
 **lining and formatting**
