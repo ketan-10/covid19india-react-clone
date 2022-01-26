@@ -4,7 +4,7 @@ import produce from 'immer';
 import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
 import { STATE_NAMES, STATISTIC_CONFIGS } from '../Constants';
-import { Data, SortConfigType, Filter } from '../types/Types';
+import { Data, SortConfigType } from '../types/Types';
 import { getStatistic } from '../utils/commonFunctions';
 import HeaderCell from './HeaderCell';
 import Cell from './Cell';
@@ -63,10 +63,7 @@ const Table: React.FC = () => {
           ? regionNameA.localeCompare(regionNameB)
           : regionNameB.localeCompare(regionNameA);
       }
-      const statisticConfig = STATISTIC_CONFIGS[sortConfig.column] as Filter<
-        typeof STATISTIC_CONFIGS,
-        { showDelta: boolean }
-      >;
+      const statisticConfig = STATISTIC_CONFIGS[sortConfig.column];
       const type =
         sortConfig.isDelta && statisticConfig?.showDelta ? 'delta' : 'total';
 
@@ -82,16 +79,8 @@ const Table: React.FC = () => {
   const statisticConfig = Object.keys(STATISTIC_CONFIGS)
     .filter((_statistic) => {
       const statistic = _statistic as keyof typeof STATISTIC_CONFIGS;
-      return !(
-        STATISTIC_CONFIGS[statistic] as Filter<
-          typeof STATISTIC_CONFIGS,
-          {
-            tableConfig: {
-              hide: boolean;
-            };
-          }
-        >
-      )?.tableConfig?.hide;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      return !STATISTIC_CONFIGS[statistic].tableConfig?.hide ?? false;
     })
     .reduce((config, _statistic) => {
       const statistic = _statistic as Exclude<

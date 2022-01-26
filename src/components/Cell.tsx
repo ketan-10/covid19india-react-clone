@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Data, Filter } from '../types/Types';
+import { Data } from '../types/Types';
 import { STATISTIC_CONFIGS } from '../Constants';
 import { getStatistic, formatNumber } from '../utils/commonFunctions';
 
@@ -11,12 +11,7 @@ interface CellProps {
 const Cell: React.FC<CellProps> = ({ stateDetails, statistic }) => {
   const result = getStatistic(stateDetails, 'total', statistic);
 
-  const isDelta = (
-    STATISTIC_CONFIGS[statistic] as Filter<
-      typeof STATISTIC_CONFIGS,
-      { showDelta: boolean }
-    >
-  ).showDelta;
+  const isDelta = STATISTIC_CONFIGS[statistic].showDelta;
 
   const delta = getStatistic(stateDetails, 'delta', statistic);
   const formatted = formatNumber(

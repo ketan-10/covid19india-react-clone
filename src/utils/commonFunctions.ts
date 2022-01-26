@@ -9,7 +9,7 @@ import {
 import { utcToZonedTime } from 'date-fns-tz';
 import i18n from 'i18next';
 
-import { Data, Filter } from '../types/Types';
+import { Data } from '../types/Types';
 import {
   STATISTIC_CONFIGS,
   TESTED_EXPIRING_DAYS,
@@ -54,10 +54,7 @@ export const getStatistic = (
   } = {}
 ): number => {
   if (expiredDate !== null) {
-    const statisticConfig = STATISTIC_CONFIGS[statistic] as Filter<
-      typeof STATISTIC_CONFIGS,
-      { category: string }
-    >;
+    const statisticConfig = STATISTIC_CONFIGS[statistic];
     if (statisticConfig?.category === 'tested') {
       if (
         !data?.meta?.tested?.date ||
@@ -130,10 +127,7 @@ export const getStatistic = (
     val = data?.[type]?.[statistic] ?? 0;
   }
 
-  const statisticConfig = STATISTIC_CONFIGS[statistic] as Filter<
-    typeof STATISTIC_CONFIGS,
-    { nonLinear: boolean; canBeInfinite: boolean }
-  >;
+  const statisticConfig = STATISTIC_CONFIGS[statistic];
   multiplyFactor = (statisticConfig?.nonLinear && 1) || multiplyFactor;
 
   let result = multiplyFactor * val;
@@ -248,14 +242,7 @@ export const formatNumber = (
 ): string => {
   if (
     Number.isNaN(value) ||
-    (statistic &&
-      (
-        STATISTIC_CONFIGS[statistic] as Filter<
-          typeof STATISTIC_CONFIGS,
-          { hideZero: boolean }
-        >
-      )?.hideZero &&
-      value === 0)
+    (statistic && STATISTIC_CONFIGS[statistic]?.hideZero && value === 0)
   ) {
     return '-';
   }

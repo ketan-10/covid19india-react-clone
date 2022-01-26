@@ -59,8 +59,23 @@ Object.keys(STATE_NAMES).map((key, _) => {
 export const STATE_CODES = stateCodesMap;
 export const STATE_CODES_ARRAY = stateCodes;
 
+export type StatisticType = {
+  displayName?: string;
+  color?: string;
+  format?: string;
+  showDelta?: boolean;
+  hasPrimary?: boolean;
+  hideZero?: boolean;
+  nonLinear?: boolean;
+  category?: string;
+  canBeInfinite?: boolean;
+  onlyDelta7?: boolean;
+  mapConfig?: any;
+  tableConfig?: any;
+};
+
 // A.k.a "Table-Columns"
-export const STATISTIC_CONFIGS = {
+const STATISTIC_CONFIGS_VALUE = {
   confirmed: {
     displayName: 'confirmed',
     color: '#ff073a',
@@ -201,6 +216,10 @@ export const STATISTIC_CONFIGS = {
       spike: true,
     },
   },
+};
+
+export const STATISTIC_CONFIGS = STATISTIC_CONFIGS_VALUE as {
+  [statisticName in keyof typeof STATISTIC_CONFIGS_VALUE]: StatisticType;
 };
 
 export const TESTED_EXPIRING_DAYS = 7;
