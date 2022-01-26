@@ -73,7 +73,9 @@ const HeaderCell: React.FC<HeaderCellProps> = ({
           )}
         </div>
       )}
-      <div>{t(toTitleCase(STATISTIC_CONFIGS[statistic].displayName))}</div>
+      <div>
+        {t(toTitleCase(STATISTIC_CONFIGS[statistic].displayName ?? ''))}
+      </div>
     </div>
   );
 };
