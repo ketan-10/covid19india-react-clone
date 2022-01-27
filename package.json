@@ -18,8 +18,8 @@
       "yarn run lint:fix",
       "prettier --write \"**/*.+(js|jsx|ts|tsx)\""
     ],
-    "*.+(yml|yaml|md)": [
-      "prettier --write \"**/*.+(yml|yaml|md)\""
+    "*.+(json|yml|yaml|md)": [
+      "prettier --write \"**/*.+(json|yml|yaml|md)\""
     ]
   },
   "dependencies": {
