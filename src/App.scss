@@ -569,23 +569,25 @@ footer {
 // *************************************************************************************************
 // re-write needed!!!
 .main {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 2rem);
+  margin: 1rem auto;
+
   .map-container {
     display: flex;
     justify-content: center;
     margin: 4rem 0;
   }
-
-  width: calc(100% - 2rem);
-  margin: 1rem auto;
   .table {
     display: grid;
     // grid-template-columns: repeat(var(--columns), max-content);
-    justify-content: center;
     grid-template-columns: repeat(var(--columns), min-content);
     gap: 0.25rem;
     color: var(--gray);
-    max-width: 100vw;
+    max-width: 100%;
     overflow-x: auto;
+    margin: 0 auto;
     font-size: 0.8125rem;
 
     .row {
