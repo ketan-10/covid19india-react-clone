@@ -21,7 +21,7 @@ type TopologyObject = {
 
 const MapVisualizer: React.FC = () => {
   const { data } = useSWR<Data>(
-    'https://data.covid19india.org/v4/min/data.min.json',
+    `${BASE_URL}api/data/data.json`,
     (link) => fetch(link).then((res) => res.json()),
     {
       revalidateOnMount: true,
@@ -30,7 +30,7 @@ const MapVisualizer: React.FC = () => {
   );
 
   const { data: geoData } = useSWR<Topology<TopologyObject>>(
-    `${BASE_URL}api/india.json`,
+    `${BASE_URL}api/maps/india.json`,
     (link): Promise<any> => json(link), // we can generate uniques 'key' here and append it to the data.
     {
       revalidateOnMount: false,

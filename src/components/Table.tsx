@@ -3,7 +3,7 @@ import { SortAscIcon, SortDescIcon } from '@primer/octicons-react';
 import produce from 'immer';
 import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
-import { STATE_NAMES, STATISTIC_CONFIGS } from '../Constants';
+import { BASE_URL, STATE_NAMES, STATISTIC_CONFIGS } from '../Constants';
 import { Data, SortConfigType } from '../types/Types';
 import { getStatistic } from '../utils/commonFunctions';
 import HeaderCell from './HeaderCell';
@@ -13,7 +13,7 @@ const Table: React.FC = () => {
   // move data loading to main component
   // https://data.covid19india.org/documentation/v4_data.html
   const { data } = useSWR<Data>(
-    'https://data.covid19india.org/v4/min/data.min.json',
+    `${BASE_URL}api/data/data.json`,
     (link) => fetch(link).then((res) => res.json()), // we can generate uniques 'key' here and append it to the data.
     {
       revalidateOnMount: true,
