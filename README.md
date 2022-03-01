@@ -247,7 +247,8 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
   ```
   - Which creates following output: 
 
-  TODO output gif.
+   ![CPT2203012016-432x60](https://user-images.githubusercontent.com/35309821/156204192-ffb8491b-4c24-47bd-a50e-1783c5243f56.gif)
+
 
   - **Objectives:**
     - When Parent Component re-render it should not affect animation state.
