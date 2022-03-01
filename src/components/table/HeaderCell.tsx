@@ -4,9 +4,9 @@ import { useLongPress } from 'react-use';
 import produce from 'immer';
 import { SortAscIcon, SortDescIcon } from '@primer/octicons-react';
 import classNames from 'classnames';
-import { STATISTIC_CONFIGS } from '../Constants';
-import { SortConfigType } from '../types/Types';
-import { toTitleCase } from '../utils/commonFunctions';
+import { STATISTIC_CONFIGS } from '../../Constants';
+import { SortConfigType } from '../../types/Types';
+import { toTitleCase } from '../../utils/commonFunctions';
 
 // as header cell have he sorting functionality.
 // we have a question of where to handel it.

@@ -6,8 +6,8 @@ import { feature } from 'topojson-client';
 import { geoMercator, geoPath } from 'd3-geo';
 // eslint-disable-next-line import/no-unresolved
 import { Topology, GeometryCollection } from 'topojson-specification';
-import { Data } from '../types/Types';
-import { BASE_URL, STATE_CODES, MAP_DIMENSIONS } from '../Constants';
+import { Data } from '../../types/Types';
+import { BASE_URL, STATE_CODES, MAP_DIMENSIONS } from '../../Constants';
 
 type GeometryProperties = {
   st_nm: string;
@@ -20,6 +20,7 @@ type TopologyObject = {
 };
 
 const MapVisualizer: React.FC = () => {
+  // https://data.covid19india.org/documentation/v4_data.html
   const { data } = useSWR<Data>(
     `${BASE_URL}api/data/data.json`,
     (link) => fetch(link).then((res) => res.json()),
@@ -104,7 +105,8 @@ const MapVisualizer: React.FC = () => {
       .on('mouseleave', function (_) {
         select(this).attr('fill-opacity', 0.1);
       });
-  });
+  }, [data, geoData]);
+
   return (
     <div className="map-container">
       <svg

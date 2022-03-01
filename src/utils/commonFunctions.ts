@@ -9,7 +9,7 @@ import {
 import { utcToZonedTime } from 'date-fns-tz';
 import i18n from 'i18next';
 
-import { Data } from '../types/Types';
+import { Data, DataBasicType } from '../types/Types';
 import {
   STATISTIC_CONFIGS,
   TESTED_EXPIRING_DAYS,
@@ -268,3 +268,16 @@ export const toTitleCase = (str: string): string =>
     /\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   );
+
+export const getActive = (data: DataBasicType | undefined): number =>
+  !data
+    ? 0
+    : (data.confirmed ?? 0) -
+      (data.deceased ?? 0) -
+      (data.recovered ?? 0) -
+      (data.other ?? 0);
+
+export const camelCase = (s: string): string => {
+  if (typeof s !== 'string') return '';
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};

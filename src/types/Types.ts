@@ -28,6 +28,7 @@ export type DataBasicType = {
   vaccinated2?: number;
 };
 
+// https://data.covid19india.org/documentation/v4_data.html
 export type Data = {
   [StateCode: string]: {
     delta?: DataBasicType;
@@ -64,6 +65,19 @@ export type Data = {
       notes?: string;
     };
     total?: DataBasicType;
+  };
+};
+
+// https://data.covid19india.org/documentation/timeseries.min.html
+export type TimeSeries = {
+  [StateCode: string]: {
+    dates: {
+      [date: string]: {
+        delta?: DataBasicType;
+        delta7?: DataBasicType;
+        total?: DataBasicType;
+      };
+    };
   };
 };
 

@@ -567,12 +567,102 @@ footer {
 }
 
 // *************************************************************************************************
-// re-write needed!!!
+
 .main {
   display: flex;
   flex-direction: column;
   width: calc(100% - 2rem);
   margin: 1rem auto;
+
+  .main-charts {
+    display: flex;
+  }
+
+  .map-navigation {
+    height: 14rem;
+    position: relative;
+
+    .levels {
+      display: flex;
+
+      .level {
+        width: 100%; // flex: 1 <- also works
+        text-align: center;
+
+        &.is-confirmed {
+          h1,
+          h5 {
+            color: var(--cherry);
+          }
+
+          h4 {
+            color: var(--cherry-mid);
+          }
+        }
+
+        &.is-active {
+          h1,
+          h5 {
+            color: var(--blue);
+          }
+
+          h4 {
+            color: var(--blue-mid);
+          }
+        }
+
+        &.is-recovered {
+          h1,
+          h5 {
+            color: var(--green);
+          }
+
+          h4 {
+            color: var(--green-mid);
+          }
+        }
+
+        &.is-deceased {
+          h1,
+          h5 {
+            color: var(--gray);
+          }
+
+          h4 {
+            color: var(--gray-mid);
+          }
+        }
+      }
+    }
+
+    .map-switcher {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      .clickable {
+        width: 100%; // flex: 1 <- also works
+        border-radius: 5px;
+
+        &:hover {
+          &.is-confirmed {
+            background: var(--cherry-light);
+          }
+
+          &.is-active {
+            background: var(--blue-light);
+          }
+
+          &.is-recovered {
+            background: var(--green-light);
+          }
+
+          &.is-deceased {
+            background: var(--gray-light);
+          }
+        }
+      }
+    }
+  }
 
   .map-container {
     display: flex;

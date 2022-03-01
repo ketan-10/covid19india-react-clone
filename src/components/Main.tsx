@@ -1,8 +1,12 @@
 import React, { Suspense } from 'react';
-import Table from './Table';
+import Table from './table/Table';
 import TableLoader from './loaders/TableLoader';
-import MapVisualizer from './MapVisualizer';
+import MapVisualizer from './map/MapVisualizer';
 import MapVisualizerLoader from './loaders/MapVisualizerLoader';
+import TimeSeriesExplorer from './timeSeries/TimeSeriesChart';
+import MapSwitcher from './mapSwitcher/MapSwitcher';
+import Level from './mapSwitcher/Level';
+import MiniGraphs from './mapSwitcher/MiniGraphs';
 
 const Main: React.FC = () => (
   <div className="main">
@@ -18,9 +22,26 @@ const Main: React.FC = () => (
     (Note: This save us `data && ` conditional step to check data availability)
     Also one more benefit is 'concurrent-mode' continues the background render,
     To batch multiple suspended and so inturn download data in parallel  */}
-    <Suspense fallback={<MapVisualizerLoader />}>
-      <MapVisualizer />
-    </Suspense>
+
+    <div className="main-charts">
+      <div className="main-left">
+        <div className="map-navigation">
+          <MapSwitcher />
+          <Level />
+          <MiniGraphs />
+        </div>
+
+        <Suspense fallback={<MapVisualizerLoader />}>
+          <MapVisualizer />
+        </Suspense>
+      </div>
+      <div className="main-right">
+        <Suspense fallback={<>Loading...</>}>
+          <TimeSeriesExplorer />
+        </Suspense>
+      </div>
+    </div>
+
     <Suspense fallback={<TableLoader />}>
       <Table />
     </Suspense>

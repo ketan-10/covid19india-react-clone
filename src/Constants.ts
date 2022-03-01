@@ -3,6 +3,9 @@ export const BASE_URL = '/covid19india-react-clone/';
 // width / height
 export const MAP_DIMENSIONS = [432, 488];
 
+export const MIN_DATE = new Date(0);
+export const MAX_DATE = new Date(2 ** 45);
+
 export const UNASSIGNED_STATE_CODE = 'UN';
 export const STATE_NAMES: {
   [stateCode: string]: string;
@@ -238,3 +241,10 @@ export const LOCALE_SHORTHANDS = {
 };
 export const ISO_DATE_REGEX = /^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$/g;
 export const INDIA_ISO_SUFFIX = 'T00:00:00+05:30';
+
+export const PRIMARY_STATISTICS = [
+  'confirmed',
+  'active',
+  'recovered',
+  'deceased',
+];

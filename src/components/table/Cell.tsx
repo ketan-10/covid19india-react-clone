@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Data } from '../types/Types';
-import { STATISTIC_CONFIGS } from '../Constants';
-import { getStatistic, formatNumber } from '../utils/commonFunctions';
+import { Data } from '../../types/Types';
+import { STATISTIC_CONFIGS } from '../../Constants';
+import { getStatistic, formatNumber } from '../../utils/commonFunctions';
 
 interface CellProps {
   stateDetails: Data[''];

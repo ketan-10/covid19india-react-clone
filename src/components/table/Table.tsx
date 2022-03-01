@@ -3,9 +3,9 @@ import { SortAscIcon, SortDescIcon } from '@primer/octicons-react';
 import produce from 'immer';
 import { useTranslation } from 'react-i18next';
 import useSWR from 'swr';
-import { BASE_URL, STATE_NAMES, STATISTIC_CONFIGS } from '../Constants';
-import { Data, SortConfigType } from '../types/Types';
-import { getStatistic } from '../utils/commonFunctions';
+import { BASE_URL, STATE_NAMES, STATISTIC_CONFIGS } from '../../Constants';
+import { Data, SortConfigType } from '../../types/Types';
+import { getStatistic } from '../../utils/commonFunctions';
 import HeaderCell from './HeaderCell';
 import Cell from './Cell';
 

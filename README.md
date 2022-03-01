@@ -191,7 +191,121 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
     and determine the transition-phase for each-data(element) in the array. <br>
   - For each data(element) the function is called with style(animation-object) and element-data from the array.
   - [Volunteers Github Gist](https://gist.github.com/ketan-10/81977644846fed3d31596d33fd928487)
+  - To test this try to call transition function in the component, when we log the return value it is the ReactFragment containing 2 children. one rendering in and one rendering out.
+  ```jsx
+  const components = navbarTransition((style, item) => {
+    console.log('rendering: ', style, item);
+    return (
+      <animated.div {...{ style }} className="nav-animated-menu">
+        Hello
+      </animated.div>
+    );
+  });
+  console.log('COMPONENT: ', components);
+  ```
 - [My project using react-spring](https://github.com/ketan-10/emoji-rain/blob/master/src/components/FloatingIcons.tsx)
+- [**UseSpring**](https://react-spring.io/basics)
+
+  - Consider following example
+  ```jsx
+  const TestAnimation: React.FC = () => {
+
+    const [clicked, setClicked] = useState(false);
+    const [flip, set] = useState(false);
+
+    const { x } = useSpring({
+      reverse: flip,
+      from: { x: 0 },
+      to: { x: 200 },
+      x: 1,
+      delay: 200,
+      config: { duration: 2000 },
+      onRest: () => set((flip) => !flip),
+    });
+
+    const getNumber = () => 
+      x.to((n) => 
+        (clicked ? n.toFixed(0) : n.toFixed(2))
+      );
+
+    return (
+      <>
+        <animated.div style={{ x }}>
+          {x.to((n) => n.toFixed(1))}
+        </animated.div>
+        <animated.div style={{ x }}>
+          {getNumber()}
+        </animated.div>
+        <button type="button" onClick={() => setClicked((c) => !c)}>
+          {clicked.toString()}
+        </button>
+      </>
+    );
+  };
+
+  export default TestAnimation;
+  ```
+  - Which creates following output: 
+
+  TODO output gif.
+
+  - **Objectives:**
+    - When Parent Component re-render it should not affect animation state.
+    - Parent Component should **not** re-render on each animation frame.
+
+  - I think of `useSpring` as building block for `useTransition`.<br>
+  - UseTransition works with data or data array, using data binding. <br>By keeping track of pervious data and add or remove animation accordingly <br>
+  - Where as in `useSpring` we can define when animation to start and stop.
+  - Use Spring hook returns an `SpringValue` object. <br>
+  Which is memoized, so does not change on re-render. <br>
+  and we can add multiple observers to it, for animation.
+
+  - If you check when `x` value changes, it does not change on re-render.
+    ```js
+    useEffect(() => {
+      console.log('X is changed : ', x);
+    }, [x]);
+    ```
+- **Animation.[div|h1|...] Component**
+  - When using animations we have to use react component like `animated.div` or `animated.h1` etc. <br>
+  - In JSX the following syntax is converted to [Following](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=DwPgUAkMAmCWBuIDeSAWBTANpg9gLgAIAiAa3QBcBDAOyIF87gB6ORMAgqG2AW0vPTQAdKxAAJLLmbc-A4aLDNwQA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.17.6&externalPlugins=&assumptions=%7B%7D) <br>
+  So basically `div`, `h1`, `p`, are all react components* on Object `animated` <br>
+  [Here it is](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/createHost.ts#L60) added in react-spring source code, And [Here it is](https://github.com/pmndrs/react-spring/blob/master/targets/web/src/primitives.ts) the list of all primitives
+  - In source `animated.div` is created with [this code](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx) in `withAnimated` Function. Which is called by above code `animated('div')`<br>
+  - **NOTE:** All the primitives as Components are created on `animated` Object when we import `react-spring` regardless of will use it or not. <br> 
+  Those are created by `createHost` in [index file](https://github.com/pmndrs/react-spring/blob/master/targets/web/src/index.ts#L16) only.
+  - All this components are [created as a Forward Ref](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L30)
+  so we can access the direct reference of html element to animate.
+
+- **`Animation.div` inputs and Interpolation object**
+  - As in the example we have multiple animation for same `x` object.
+  - `x.to((n) => n.toFixed(1))` this line returns an Interpolation object. <br> It is an Observer which will observer on `x` and create animation by updating current component using [`givenRef`](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L30).
+  - If we notice, we are directly passing `{ x }` to `style` props. <br>
+  The `style` prop is considered special react-spring will automatically create Interpolation for it. <br>
+  it's done by creating `AnimationStyle` object by calling [`host.createAnimatedStyle(props.style)`](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L114) on each render.
+  - In The example we are passing `x.to((n) => n.toFixed(1))` directly as a children. <br> If we pass Object as a child to Custom Component, it goes to `props.children`. Which react-spring will use to create animation.
+  - On each render, new Observers will be attached and previous Observers will be unsubscribed. It is done by keeping the `lastObserver` in ref, and useEffect for each render. [Source Code](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L69) 
+
+- Note: 
+  - As per example Following works
+  ```jsx
+  <animated.div>{x.to((n) => n.toFixed(1))}</animated.div>
+  ```
+  - But the following does not:
+  ```jsx
+  <animated.div> Hello {x.to((n) => n.toFixed(1))}</animated.div>
+  <animated.div></div>{x.to((n) => n.toFixed(1))}</div></animated.div>
+  ```
+  As the Interpolation object outside the `style` prop, <br>
+  will only work if it is set directly as an object on `prop` for this example `prop.children`.  
+
+- **Takeaways in Objectives:**
+  - When Parent Component re-render it should not affect animation state.
+    - As we return the same `x` object (SpringValue) each time, the object will not change so does the animation state.
+    - The Interpolation Observers (`x.to((n) => n.toFixed(1))`) are created from the **current state** of SpringValue(`x`) **Each render**, <br> And the previous observers are un-subscribed each render.
+  - Parent Component should **not** re-render on each animation frame.
+    - The when Interpolation object will observe the change, <br> It has the `givenRef` of forwarded ref, so it will directly change the HTML using ref.
+
 
 **Dark Mode**
 

@@ -17,5 +17,8 @@
   // tell the ESLint plugin to run on save
   "editor.codeActionsOnSave": {
     "source.fixAll": true
+  },
+  "search.exclude": {
+    "public/api": true,
   }
 }
