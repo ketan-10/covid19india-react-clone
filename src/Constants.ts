@@ -247,4 +247,4 @@ export const PRIMARY_STATISTICS = [
   'active',
   'recovered',
   'deceased',
-];
+] as const;

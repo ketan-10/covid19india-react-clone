@@ -23,7 +23,7 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - created vite app with : `yarn create vite`
 - [WTF are Babel and Webpack 😵 ? Explained in 2 mins.](https://dev.to/getd/wtf-are-babel-and-webpack-explained-in-2-mins-43be)
-   -  We are using `tsc` insted of `babel` and `esbuild` insted of `webpack`
+  - We are using `tsc` insted of `babel` and `esbuild` insted of `webpack`
 - [Let's Learn esbuild! (with Sunil Pai) — Learn With Jason](https://youtu.be/KLdF1yu_bmI)
 
 **lining and formatting**
@@ -94,11 +94,10 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
   - Though we have `align-content` property with `flex-wrap` to control all rows as a complete content.
   - In `Grid` we have `justify-item` property as in grid unlike flex columns also lineup perfectly.
 
-| Justify     | Align       |
-| ----------- | ----------- |
-| ![1](https://user-images.githubusercontent.com/35309821/145279500-bf5dedf9-3438-4155-aaee-1a2b066ad60b.png) |![2](https://user-images.githubusercontent.com/35309821/145279542-f791c906-2328-403f-87c6-71f41632c390.png) |
+| Justify                                                                                                     | Align                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| ![1](https://user-images.githubusercontent.com/35309821/145279500-bf5dedf9-3438-4155-aaee-1a2b066ad60b.png) | ![2](https://user-images.githubusercontent.com/35309821/145279542-f791c906-2328-403f-87c6-71f41632c390.png) |
 
-- SVG: [What are SVG viewport and viewBox? [ A beginners guide to SVG part 3 ]](https://www.youtube.com/watch?v=TBYJ2V1jAlA&list=PL4-IK0AVhVjP0EeV513_b30lhGRTfMbYd&index=3) 
 
 **React**
 
@@ -143,9 +142,13 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 **D3.js**
 
+- SVG: [What are SVG viewport and viewBox? [ A beginners guide to SVG part 3 ]](https://www.youtube.com/watch?v=TBYJ2V1jAlA&list=PL4-IK0AVhVjP0EeV513_b30lhGRTfMbYd&index=3)
+
 - [D3.js tutorial by andrew chen](https://www.youtube.com/watch?v=UYrJ4jukvig&list=PLPtgdQ4YE9cgdPwOKShhPHdVEseLPGd_t)
 
 - [My D3 Projects](https://github.com/ketan-10/Testing/tree/master/pages/d3)
+
+- React Router 6 : [React Router 6 - What Changed & Upgrading Guide](https://www.youtube.com/watch?v=zEQiNFAwDGo)
 
 **Animation**
 
@@ -207,9 +210,9 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - [**UseSpring**](https://react-spring.io/basics)
 
   - Consider following example
+
   ```jsx
   const TestAnimation: React.FC = () => {
-
     const [clicked, setClicked] = useState(false);
     const [flip, set] = useState(false);
 
@@ -223,19 +226,13 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
       onRest: () => set((flip) => !flip),
     });
 
-    const getNumber = () => 
-      x.to((n) => 
-        (clicked ? n.toFixed(0) : n.toFixed(2))
-      );
+    const getNumber = () =>
+      x.to((n) => (clicked ? n.toFixed(0) : n.toFixed(2)));
 
     return (
       <>
-        <animated.div style={{ x }}>
-          {x.to((n) => n.toFixed(1))}
-        </animated.div>
-        <animated.div style={{ x }}>
-          {getNumber()}
-        </animated.div>
+        <animated.div style={{ x }}>{x.to((n) => n.toFixed(1))}</animated.div>
+        <animated.div style={{ x }}>{getNumber()}</animated.div>
         <button type="button" onClick={() => setClicked((c) => !c)}>
           {clicked.toString()}
         </button>
@@ -245,12 +242,13 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
   export default TestAnimation;
   ```
-  - Which creates following output: 
 
-   ![CPT2203012016-432x60](https://user-images.githubusercontent.com/35309821/156204192-ffb8491b-4c24-47bd-a50e-1783c5243f56.gif)
+  - Which creates following output:
 
+  ![CPT2203012016-432x60](https://user-images.githubusercontent.com/35309821/156204192-ffb8491b-4c24-47bd-a50e-1783c5243f56.gif)
 
   - **Objectives:**
+
     - When Parent Component re-render it should not affect animation state.
     - Parent Component should **not** re-render on each animation frame.
 
@@ -258,8 +256,8 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
   - UseTransition works with data or data array, using data binding. <br>By keeping track of pervious data and add or remove animation accordingly <br>
   - Where as in `useSpring` we can define when animation to start and stop.
   - Use Spring hook returns an `SpringValue` object. <br>
-  Which is memoized, so does not change on re-render. <br>
-  and we can add multiple observers to it, for animation.
+    Which is memoized, so does not change on re-render. <br>
+    and we can add multiple observers to it, for animation.
 
   - If you check when `x` value changes, it does not change on re-render.
     ```js
@@ -267,38 +265,46 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
       console.log('X is changed : ', x);
     }, [x]);
     ```
+
 - **Animation.[div|h1|...] Component**
+
   - When using animations we have to use react component like `animated.div` or `animated.h1` etc. <br>
   - In JSX the following syntax is converted to [Following](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=DwPgUAkMAmCWBuIDeSAWBTANpg9gLgAIAiAa3QBcBDAOyIF87gB6ORMAgqG2AW0vPTQAdKxAAJLLmbc-A4aLDNwQA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.17.6&externalPlugins=&assumptions=%7B%7D) <br>
-  So basically `div`, `h1`, `p`, are all react components* on Object `animated` <br>
-  [Here it is](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/createHost.ts#L60) added in react-spring source code, And [Here it is](https://github.com/pmndrs/react-spring/blob/master/targets/web/src/primitives.ts) the list of all primitives
+    So basically `div`, `h1`, `p`, are all react components\* on Object `animated` <br>
+    [Here it is](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/createHost.ts#L60) added in react-spring source code, And [Here it is](https://github.com/pmndrs/react-spring/blob/master/targets/web/src/primitives.ts) the list of all primitives
   - In source `animated.div` is created with [this code](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx) in `withAnimated` Function. Which is called by above code `animated('div')`<br>
-  - **NOTE:** All the primitives as Components are created on `animated` Object when we import `react-spring` regardless of will use it or not. <br> 
-  Those are created by `createHost` in [index file](https://github.com/pmndrs/react-spring/blob/master/targets/web/src/index.ts#L16) only.
+  - **NOTE:** All the primitives as Components are created on `animated` Object when we import `react-spring` regardless of will use it or not. <br>
+    Those are created by `createHost` in [index file](https://github.com/pmndrs/react-spring/blob/master/targets/web/src/index.ts#L16) only.
   - All this components are [created as a Forward Ref](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L30)
-  so we can access the direct reference of html element to animate.
+    so we can access the direct reference of html element to animate.
 
 - **`Animation.div` inputs and Interpolation object**
+
   - As in the example we have multiple animation for same `x` object.
   - `x.to((n) => n.toFixed(1))` this line returns an Interpolation object. <br> It is an Observer which will observer on `x` and create animation by updating current component using [`givenRef`](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L30).
   - If we notice, we are directly passing `{ x }` to `style` props. <br>
-  The `style` prop is considered special react-spring will automatically create Interpolation for it. <br>
-  it's done by creating `AnimationStyle` object by calling [`host.createAnimatedStyle(props.style)`](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L114) on each render.
+    The `style` prop is considered special react-spring will automatically create Interpolation for it. <br>
+    it's done by creating `AnimationStyle` object by calling [`host.createAnimatedStyle(props.style)`](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L114) on each render.
   - In The example we are passing `x.to((n) => n.toFixed(1))` directly as a children. <br> If we pass Object as a child to Custom Component, it goes to `props.children`. Which react-spring will use to create animation.
-  - On each render, new Observers will be attached and previous Observers will be unsubscribed. It is done by keeping the `lastObserver` in ref, and useEffect for each render. [Source Code](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L69) 
+  - On each render, new Observers will be attached and previous Observers will be unsubscribed. It is done by keeping the `lastObserver` in ref, and useEffect for each render. [Source Code](https://github.com/pmndrs/react-spring/blob/master/packages/animated/src/withAnimated.tsx#L69)
 
-- Note: 
+- Note:
+
   - As per example Following works
+
   ```jsx
   <animated.div>{x.to((n) => n.toFixed(1))}</animated.div>
   ```
+
   - But the following does not:
+
   ```jsx
   <animated.div> Hello {x.to((n) => n.toFixed(1))}</animated.div>
   <animated.div></div>{x.to((n) => n.toFixed(1))}</div></animated.div>
   ```
+
   As the Interpolation object outside the `style` prop, <br>
-  will only work if it is set directly as an object on `prop` for this example `prop.children`.  
+  will only work if it is set directly as an object on `prop` for this example `prop.children`.
 
 - **Takeaways in Objectives:**
   - When Parent Component re-render it should not affect animation state.
@@ -306,7 +312,6 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
     - The Interpolation Observers (`x.to((n) => n.toFixed(1))`) are created from the **current state** of SpringValue(`x`) **Each render**, <br> And the previous observers are un-subscribed each render.
   - Parent Component should **not** re-render on each animation frame.
     - The when Interpolation object will observe the change, <br> It has the `givenRef` of forwarded ref, so it will directly change the HTML using ref.
-
 
 **Dark Mode**
 
@@ -448,6 +453,26 @@ const four: ObjectUnionType<{
 
 - VS-Code show expanded type: [How can I see the full expanded contract of a Typescript type?](https://stackoverflow.com/questions/57683303/how-can-i-see-the-full-expanded-contract-of-a-typescript-type)
 
+```ts
+type test = SomeFunction;
+type test = Expand<SomeFunction>;
+// expands object types one level deep
+type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+// expands object types recursively
+type ExpandRecursively<T> = T extends object
+  ? T extends infer O
+    ? { [K in keyof O]: ExpandRecursively<O[K]> }
+    : never
+  : T;
+```
+
+- [TypeScript: How to get types from arrays](https://steveholgado.com/typescript-types-from-arrays/)
+
+```ts
+const animals = ['cat', 'dog', 'mouse'] as const;
+type Animal = typeof animals[number];
+```
+
 **Reflow-Event & Critical-Rendering-Path & UseLayoutEffect - Updating the DOM element size without the flicker**
 
 - [Learn useLayoutEffect In 5 Minutes](https://www.youtube.com/watch?v=wU57kvYOxT4)
@@ -465,3 +490,7 @@ const four: ObjectUnionType<{
 **Miscellaneous**
 
 - [Retry Promise](https://github.com/ketan-10/Testing/blob/master/coroutine-async-await/retry-promise.js)
+
+```js
+  {"ketan":"this",...(true == true && {"hello":"hi"})}
+```

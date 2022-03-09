@@ -1,11 +1,6 @@
 import './App.scss';
 import React, { useState, lazy, Suspense } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import { Page } from './types/Types';
 import { BASE_URL } from './Constants';
@@ -78,17 +73,18 @@ const App: React.FC = () => {
         <Banner />
         <Suspense fallback={<div />}>
           <div className="page">
-            <Switch>
+            <Routes>
               {/* <Suspense fallback={<h2>Loading.</h2>}> */}
               {/* <- If suspense was used here footer will be shown until the Volunteers useSWR data loads */}
               {pages.map((page) => (
-                <Route exact path={page.pageLink} key={page.pageLink}>
-                  {page.view}
-                </Route>
+                <Route
+                  path={page.pageLink}
+                  key={page.pageLink}
+                  element={page.view}
+                />
               ))}
               {/* </Suspense> */}
-              <Redirect to="/" />
-            </Switch>
+            </Routes>
           </div>
           <Footer /> {/* Footer is used inside the suspense so, */}
           {/* it will be rendered on concurrent mode, until the Volunteers data loads */}
