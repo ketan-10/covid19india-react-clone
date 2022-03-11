@@ -51,6 +51,52 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [When should you NOT use React memo?](https://stackoverflow.com/questions/53074551/when-should-you-not-use-react-memo)
 
+
+**Immer with useReducer**
+
+- [Using Immer with Reducers and React Hooks](https://youtu.be/FmKjwh34Rn8)
+
+- [Carrier Produce](https://immerjs.github.io/immer/curried-produce) i.e. `produce` function which takes a function as a single parameter. <br>
+- In `produce(reducer)` immer will convert the function where <br> first argument will be replaced with mutable <br>
+We can override the `useReducer` hook like following
+```js
+const useImmerProducer = (reducer, initState) =>  {
+  return React.useReducer(produce(reducer), initState)
+}
+```
+- So instead of writing actions like following <br>
+Before: 
+```js
+const actionReducer = (state, action) => {
+  switch(action.type) {
+    case SET_COUNT:
+      return produce(state, (mutableState) => {
+        mutableState.count = action.count
+      })
+  }
+}
+```
+After:
+```js
+const actionReducer = (state, action) => {
+  switch(action.type) {
+    case SET_COUNT:
+      state.count = action.count
+      return;
+  }
+}
+```
+- Inner Implementation:
+```js
+const produceFunc = (myFun) => {
+  return (args) => {
+    return produce(args[0], (mutable) => {
+      myFun(mutable, args[1:])
+    })
+  }
+}
+```
+
 **CSS**
 
 - [How to host your own fonts made simple](https://youtu.be/KzqQXDbDvus)
@@ -140,6 +186,8 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 
 - [404.html with gh-pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)
 
+- React Router 6 : [React Router 6 - What Changed & Upgrading Guide](https://www.youtube.com/watch?v=zEQiNFAwDGo)
+
 **D3.js**
 
 - SVG: [What are SVG viewport and viewBox? [ A beginners guide to SVG part 3 ]](https://www.youtube.com/watch?v=TBYJ2V1jAlA&list=PL4-IK0AVhVjP0EeV513_b30lhGRTfMbYd&index=3)
@@ -147,8 +195,6 @@ Original Codebase: [Github](https://github.com/covid19india/covid19india-react)
 - [D3.js tutorial by andrew chen](https://www.youtube.com/watch?v=UYrJ4jukvig&list=PLPtgdQ4YE9cgdPwOKShhPHdVEseLPGd_t)
 
 - [My D3 Projects](https://github.com/ketan-10/Testing/tree/master/pages/d3)
-
-- React Router 6 : [React Router 6 - What Changed & Upgrading Guide](https://www.youtube.com/watch?v=zEQiNFAwDGo)
 
 **Animation**
 
