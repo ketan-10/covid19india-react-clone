@@ -195,6 +195,11 @@ const produceFunc = (myFun) => {
 - [D3.js tutorial by andrew chen](https://www.youtube.com/watch?v=UYrJ4jukvig&list=PLPtgdQ4YE9cgdPwOKShhPHdVEseLPGd_t)
 
 - [My D3 Projects](https://github.com/ketan-10/Testing/tree/master/pages/d3)
+- TODO: 
+  - https://observablehq.com/@d3/selection-join
+  - https://observablehq.com/@d3/general-update-pattern
+  - Thinking with join : https://bost.ocks.org/mike/join/
+  - https://www.intothevoid.io/data-visualization/understanding-d3-data-vs-datum/
 
 **Animation**
 
