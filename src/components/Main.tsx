@@ -6,7 +6,6 @@ import MapVisualizerLoader from './loaders/MapVisualizerLoader';
 import TimeSeriesExplorer from './timeSeries/TimeSeriesChart';
 import MapSwitcher from './mapSwitcher/MapSwitcher';
 import Level from './mapSwitcher/Level';
-import MiniGraphs from './mapSwitcher/MiniGraphs';
 
 const Main: React.FC = () => (
   <div className="main">
@@ -25,18 +24,16 @@ const Main: React.FC = () => (
 
     <div className="main-charts">
       <div className="main-left">
-        <div className="map-navigation">
-          <MapSwitcher />
-          <Level />
-          <MiniGraphs />
-        </div>
-
         <Suspense fallback={<MapVisualizerLoader />}>
           <MapVisualizer />
         </Suspense>
       </div>
       <div className="main-right">
-        <Suspense fallback={<>Loading...</>}>
+        <div className="map-navigation">
+          <MapSwitcher />
+          <Level />
+        </div>
+        <Suspense fallback={<></>}>
           <TimeSeriesExplorer />
         </Suspense>
       </div>

@@ -168,6 +168,7 @@ h6 {
     color: var(--brown);
   }
 }
+
 .send {
   color: var(--blue-mid);
 
@@ -198,6 +199,7 @@ h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     .navbar__left {
       color: var(--gray-mid);
       cursor: pointer;
@@ -208,6 +210,7 @@ h6 {
       &:hover {
         color: var(--gray);
       }
+
       // position: absolute;
     }
 
@@ -215,12 +218,15 @@ h6 {
       font-size: 18px;
       font-weight: 900;
       text-transform: uppercase;
+
       a {
         color: var(--gray);
         text-decoration: none;
+
         span.blue {
           color: var(--blue);
         }
+
         span.space {
           font-size: 0;
         }
@@ -254,6 +260,7 @@ h6 {
           justify-content: center;
           height: 4.2rem;
           width: 100%;
+
           &:hover {
             color: var(--blue);
           }
@@ -261,6 +268,7 @@ h6 {
       }
     }
   }
+
   .nav-animated-menu {
     position: absolute;
 
@@ -282,24 +290,22 @@ h6 {
         transition: none; // remove background color change transition, If used.
 
         &:hover {
-          background: var(
-            --pblue-hover
-          ); // color on hover, transparent otherwise, no need to adjust in dark-mode
+          background: var(--pblue-hover); // color on hover, transparent otherwise, no need to adjust in dark-mode
         }
+
         .selected {
           background: var(--pblue-light);
           color: var(--pblue);
           padding: 0.25rem;
         }
       }
+
       .expand-bottom {
         font-size: 12px;
         color: var(--gray);
         font-weight: 680;
         margin-top: auto;
-        margin-bottom: calc(
-          12px + 3rem
-        ); // to eliminate the gap between the navbar
+        margin-bottom: calc(12px + 3rem); // to eliminate the gap between the navbar
         // as navbar__menu length is 100vh we have to add margin-bottom
         // can't use parent div as navbar__menu is position:absolute
         padding: 2em;
@@ -346,6 +352,7 @@ h6 {
       background: var(--pblue-hover);
     }
   }
+
   .ls-list {
     color: var(--blue-mid);
     font-weight: 600;
@@ -366,6 +373,7 @@ h6 {
         color: var(--blue);
       }
     }
+
     .ls-active {
       background: var(--pblue-light);
       border-radius: 5px;
@@ -382,7 +390,7 @@ h6 {
   flex-direction: column;
   align-items: center;
 
-  > p {
+  >p {
     // margin: 0 auto;
     color: var(--blue);
     background-color: var(--blue-light);
@@ -414,6 +422,7 @@ h6 {
       .volunteers__container__item__image {
         height: 100%; // this is needed as image will make the container overflow.
         width: 75px;
+
         img {
           height: 100%;
           object-fit: contain;
@@ -435,6 +444,7 @@ h6 {
         flex-grow: 1;
         height: 100%;
         overflow: hidden;
+
         h2 {
           color: var(--gray);
           // font-size: 1rem;
@@ -443,6 +453,7 @@ h6 {
           text-overflow: ellipsis;
           overflow: hidden;
         }
+
         p {
           color: var(--blue);
           margin: 0;
@@ -461,6 +472,7 @@ h6 {
             margin: 0;
             text-decoration: none;
             transition: all 0.2s ease-in-out;
+
             &:hover {
               color: var(--blue-hover);
             }
@@ -480,16 +492,20 @@ h6 {
         }
       }
     }
+
     .last {
       position: relative;
       padding: 0;
+
       .volunteers__container__item {
         width: 70%;
         position: absolute;
+
         &:nth-child(2) {
           background-color: white;
           left: 15%;
         }
+
         &:nth-child(3) {
           left: 30%;
         }
@@ -530,6 +546,7 @@ h6 {
     &:hover {
       background: var(--red-hover);
     }
+
     svg {
       vertical-align: text-bottom;
     }
@@ -547,6 +564,7 @@ footer {
   margin-top: auto;
   display: flex;
   flex-direction: column;
+
   .footer__title {
     font-weight: 900;
     text-transform: uppercase;
@@ -576,58 +594,104 @@ footer {
 
   .main-charts {
     display: flex;
+    flex-wrap: wrap-reverse;
+
+    .main-left {
+      flex-grow: 1;
+      max-width: 100%;
+    }
+
+    .main-right {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 100%;
+
+      .timeSeries {
+        flex-grow: 1;
+        min-height: 15rem;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .brush-container {
+        width: 100%;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   }
 
   .map-navigation {
-    height: 14rem;
+    height: 9rem;
     position: relative;
 
     .levels {
       display: flex;
 
       .level {
-        width: 100%; // flex: 1 <- also works
+        flex-grow: 1;
         text-align: center;
+        --font-size-level: min(3.75vw,1.4rem);
 
         &.is-confirmed {
-          h1,
+
+          h1 {
+            color: var(--cherry);
+            font-size: var(--font-size-level) !important;
+          }
           h5 {
             color: var(--cherry);
           }
-
           h4 {
             color: var(--cherry-mid);
           }
         }
 
         &.is-active {
-          h1,
+
+          h1 {
+            color: var(--blue);
+            font-size: var(--font-size-level) !important;
+          }
           h5 {
             color: var(--blue);
           }
-
           h4 {
             color: var(--blue-mid);
           }
         }
 
         &.is-recovered {
-          h1,
+
+          h1 {
+            color: var(--green);
+            font-size: var(--font-size-level) !important;
+          }
           h5 {
             color: var(--green);
           }
-
           h4 {
             color: var(--green-mid);
           }
         }
 
         &.is-deceased {
-          h1,
+
+          h1 {
+            color: var(--gray);
+            font-size: var(--font-size-level) !important;
+          }
           h5 {
             color: var(--gray);
           }
-
           h4 {
             color: var(--gray-mid);
           }
@@ -639,8 +703,10 @@ footer {
       position: absolute;
       inset: 0;
       display: flex;
+
       .clickable {
-        width: 100%; // flex: 1 <- also works
+        // width: 100%;
+        flex-grow: 1;
         border-radius: 5px;
 
         &:hover {
@@ -669,6 +735,7 @@ footer {
     justify-content: center;
     margin: 4rem 0;
   }
+
   .table {
     display: grid;
     // grid-template-columns: repeat(var(--columns), max-content);
@@ -697,12 +764,14 @@ footer {
           cursor: pointer;
           position: relative;
           padding-top: 1rem;
+
           .sort-icon {
             position: absolute;
             top: 0.25rem;
             right: 0.25rem;
             line-height: 0;
           }
+
           &:not(:first-child) {
             text-align: right;
           }
@@ -711,6 +780,7 @@ footer {
 
       // data row
       &.row--detail {
+
         // odd rows
         &:nth-child(odd) {
           .cell--detail {
@@ -722,10 +792,12 @@ footer {
           text-align: right;
           justify-content: flex-end;
           font-size: 0.875rem;
+
           .delta {
             font-size: 0.9em;
           }
         }
+
         // state name cell
       }
     }
@@ -739,7 +811,8 @@ footer {
 
     .row--header .cell--statistic,
     .row--detail .cell--state-header // state name cell
-    {
+
+      {
       font-weight: 900;
       background: var(--gray-light-opaque);
       justify-content: center;
@@ -749,18 +822,23 @@ footer {
     .is-confirmed {
       color: var(--cherry);
     }
+
     .is-active {
       color: var(--blue);
     }
+
     .is-recovered {
       color: var(--green);
     }
+
     .is-deceased {
       color: var(--gray);
     }
+
     .is-tested {
       color: var(--purple);
     }
+
     .is-vaccinated,
     .is-vaccinated1,
     .is-vaccinated2 {
@@ -781,7 +859,8 @@ footer {
   .volunteers__container__item,
   .row--header .cell--statistic,
   .row--detail .cell--state-header // state name cell
-  {
+
+    {
     background: var(--dark-m-gray-light) !important;
   }
 
@@ -792,6 +871,7 @@ footer {
       }
     }
   }
+
   .table-loader {
     rect {
       fill: var(--dark-m-gray-light) !important;
@@ -816,6 +896,7 @@ footer {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -830,6 +911,7 @@ footer {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -845,6 +927,7 @@ footer {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -866,6 +949,7 @@ footer {
     margin-left: 6rem; // escape the vertical navbar
     margin-right: 1rem; // escape the scroll bar -> as html width is set to 100vw to avoid repositioning.
   }
+
   .navbar {
     .navbar-container {
       background: var(--gray-light-opaque);
@@ -882,15 +966,18 @@ footer {
         order: 3;
         margin-top: auto;
       }
+
       .navbar__middle {
         font-size: 0.625rem;
         width: 4rem;
         padding: 2rem 0; // padding should be em not rem, as it can grow/shrink if font-size of current element is overwritten by higher priority class eg inline css. but I don't want to get into that 😁
       }
+
       .navbar__right {
         width: 100%; //
       }
     }
+
     .nav-animated-menu {
       .navbar__menu {
         position: fixed;
@@ -910,6 +997,7 @@ footer {
       }
     }
   }
+
   .banner {
     flex-direction: row;
     gap: 0.5rem;
@@ -925,6 +1013,7 @@ footer {
   .main {
     width: 80%;
   }
+
   // .page {
   //   margin-left: 6rem; // escape the vertical navbar
   // }

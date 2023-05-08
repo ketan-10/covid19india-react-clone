@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
-import { select, Selection } from 'd3-selection';
+import { select } from 'd3-selection';
 import { scaleTime, scaleLinear } from 'd3-scale';
-import { axisBottom, axisRight, axisTop, axisLeft } from 'd3-axis';
+import { axisBottom, axisRight } from 'd3-axis';
 import { line, area, curveStep } from 'd3-shape';
+import { useMeasure } from 'react-use';
 import { BASE_URL, MAX_DATE, MIN_DATE } from '../../Constants';
 import { TimeSeries } from '../../types/Types';
-import { getActive } from '../../utils/commonFunctions';
+import { formatNumber, getActive } from '../../utils/commonFunctions';
 import TimeSeriesBrush from './TimeSeriesBrush';
 
 type DataType = { date: Date; value: number };
@@ -23,6 +24,8 @@ const TimeSeriesChart: React.FC = () => {
     }
   );
 
+  const margin = 30;
+  const [wrapperRef, { width, height }] = useMeasure<HTMLDivElement>();
   const [startDate, setStartDate] = useState<Date>(MIN_DATE);
   const [endDate, setEndDate] = useState<Date>(MAX_DATE);
 
@@ -50,24 +53,34 @@ const TimeSeriesChart: React.FC = () => {
 
     const xScale = scaleTime()
       .domain([minDate.date, maxDate.date])
-      .range([10, 900]);
+      .range([0, width - margin]);
 
-    const xAxis = axisBottom(xScale);
+    const xAxis = axisBottom(xScale).ticks(5);
 
     const yScale = scaleLinear()
       .domain([minValue.value, maxValue.value])
-      .range([500, 10]);
+      .range([height - margin, 10]);
 
-    const yAxis = axisRight(yScale);
+    const yAxis = axisRight<number>(yScale)
+      .ticks(8)
+      .tickFormat((num) => formatNumber(num, 'short', 'active'))
+      .tickPadding(2);
     const svg = select(svgRef.current);
     svg
       .select<SVGGElement>('.x-axis')
-      .attr('transform', 'translate(0, 500)')
-      .call(xAxis);
+      .attr('transform', `translate(0, ${height - margin})`)
+      .attr('stroke', 'var(--green-hover)')
+      .call(xAxis)
+      .selectAll('path')
+      .attr('stroke', 'var(--green)');
+
     svg
       .select<SVGGElement>('.y-axis')
-      .attr('transform', 'translate(900, 0)')
-      .call(yAxis);
+      .attr('transform', `translate(${width - margin}, 0)`)
+      .attr('stroke', 'var(--green-hover)')
+      .call(yAxis)
+      .selectAll('path')
+      .attr('stroke', 'var(--green)');
 
     // svg
     //   .select<SVGGElement>('.points')
@@ -75,7 +88,7 @@ const TimeSeriesChart: React.FC = () => {
     //   .data(confirmed)
     //   .enter()
     //   .append('circle')
-    //   .style('fill', 'var(--blue)')
+    //   .style('fill', 'var(--green)')
     //   .attr('opacity', 0.7)
     //   .attr('cx', (d) => xScale(d.date))
     //   .attr('cy', (d) => yScale(d.value))
@@ -111,7 +124,7 @@ const TimeSeriesChart: React.FC = () => {
       .append('path')
       .attr('d', (d) => l(d))
       .attr('fill', 'none')
-      .attr('stroke', 'var(--blue)');
+      .attr('stroke', 'var(--green)');
 
     // remove not needed
     // selectedData.exit().remove();
@@ -120,36 +133,38 @@ const TimeSeriesChart: React.FC = () => {
       .select<SVGGElement>('.area')
       .selectAll<SVGPathElement, DataType[]>('path')
       .data([confirmed], (d) => d.length)
-      // .call((update) => {
-      //   update.attr('d', (d) => a(d));
-      // })
+      .call((update) => {
+        update.attr('d', (d) => a(d));
+      })
       .call((enter) => {
         enter
           .enter()
           .append('path')
           .attr('d', (d) => a(d))
-          .attr('fill', 'var(--blue-light)');
+          .attr('fill', 'var(--green-light)');
       })
       // here remove needed.
       .call((exit) => {
         exit.exit().remove();
       });
-  }, [endDate, startDate, timeSeries]);
+  }, [endDate, startDate, timeSeries, width, height]);
 
   return (
-    <div>
-      <svg ref={svgRef} style={{ width: 1000, height: 600 }}>
-        <g className="x-axis" />
-        <g className="y-axis" />
-        <g className="points" />
-        <g className="line" />
-        <g className="area" />
-      </svg>
+    <>
+      <div ref={wrapperRef} className="timeSeries">
+        <svg ref={svgRef}>
+          <g className="x-axis" />
+          <g className="y-axis" />
+          <g className="points" />
+          <g className="line" />
+          <g className="area" />
+        </svg>
+      </div>
 
       {timeSeries && (
         <TimeSeriesBrush {...{ timeSeries, setStartDate, setEndDate }} />
       )}
-    </div>
+    </>
   );
 };
 

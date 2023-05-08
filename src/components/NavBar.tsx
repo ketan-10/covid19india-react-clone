@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLockBodyScroll, usePageLeave, useWindowSize } from 'react-use';
 import { Book, HelpCircle, Home, Moon, Sun, Users } from 'react-feather';

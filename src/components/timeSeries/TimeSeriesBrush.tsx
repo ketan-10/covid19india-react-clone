@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { select } from 'd3-selection';
-import { axisBottom, axisRight } from 'd3-axis';
+import { axisBottom } from 'd3-axis';
 import { scaleTime, scaleLinear } from 'd3-scale';
 import { area, curveStep } from 'd3-shape';
 import { brushX } from 'd3-brush';
+import { useMeasure } from 'react-use';
 import { TimeSeries } from '../../types/Types';
 // import {usedra} from "react-use";
 
@@ -13,7 +14,9 @@ interface TimeSeriesBrushProps {
   setEndDate: (date: Date) => void;
 }
 
-const width = 700;
+const height = 70;
+const leftMargin = 30;
+type DataType = { date: Date; value: number };
 
 const TimeSeriesBrush: React.FC<TimeSeriesBrushProps> = ({
   timeSeries,
@@ -21,7 +24,9 @@ const TimeSeriesBrush: React.FC<TimeSeriesBrushProps> = ({
   setEndDate,
 }) => {
   const svgRef = useRef(null);
+  const [wrapperRef, { width }] = useMeasure<HTMLDivElement>();
   useEffect(() => {
+    // if (!width) return;
     const svg = select(svgRef.current);
 
     const { dates } = timeSeries.TT;
@@ -41,37 +46,62 @@ const TimeSeriesBrush: React.FC<TimeSeriesBrushProps> = ({
 
     const xScale = scaleTime()
       .domain([minDate.date, maxDate.date])
-      .range([0, width]);
+      .range([0, width - leftMargin]);
 
-    const xAxis = axisBottom(xScale);
+    const xAxis = axisBottom(xScale).ticks(5);
 
     svg
       .select<SVGGElement>('.x-axis')
-      .attr('transform', 'translate(0, 100)')
-      // .call(xAxis);
-      .call((thisElement) => xAxis(thisElement));
+      .attr('transform', `translate(0, ${height})`)
+      .attr('stroke', 'var(--red-hover)')
+      .call((thisElement) => xAxis(thisElement))
+      .selectAll('path')
+      .attr('stroke', 'var(--red)');
 
     const yScale = scaleLinear()
       .domain([minValue.value, maxValue.value])
-      .range([100, 10]);
+      .range([height, 10]);
 
-    const stepCurve = area<{ date: Date; value: number }>()
+    const stepCurve = area<DataType>()
       .curve(curveStep)
       .x((d) => xScale(d.date))
       .y0(yScale(0))
       .y1((d) => yScale(d.value));
+    // svg
+    //   .select<SVGGElement>('.confirmed-graph')
+    //   .selectAll('path')
+    //   .data([confirmed])
+    //   .enter()
+    //   .append('path')
+    //   .attr('d', stepCurve)
+    //   .attr('fill', 'var(--red-light)')
+    //   .attr('stroke', 'var(--red)');
+
     svg
       .select<SVGGElement>('.confirmed-graph')
-      .selectAll('path')
+      .selectAll<SVGAElement, DataType[]>('path')
       .data([confirmed])
-      .enter()
+      .join(
+        (enter) =>
+          enter
+            .append('path')
+            .attr('d', stepCurve)
+            .attr('fill', 'var(--red-light)')
+            .attr('stroke', 'var(--red)'),
+        (update) => update.attr('d', stepCurve),
+        (exit) => exit.remove()
+      )
       .append('path')
       .attr('d', stepCurve)
       .attr('fill', 'var(--red-light)')
       .attr('stroke', 'var(--red)');
 
-    svg.select<SVGGElement>('.brush').call(
-      brushX().on('start brush', ({ type, selection }) => {
+    const brush = brushX()
+      .extent([
+        [0, 0],
+        [width - leftMargin, height],
+      ])
+      .on('start brush', ({ type, selection }) => {
         if (type !== 'brush') return;
         const [x, y] = selection as [number, number];
 
@@ -79,15 +109,20 @@ const TimeSeriesBrush: React.FC<TimeSeriesBrushProps> = ({
         const x1 = xScale.invert(y);
         setStartDate(x0);
         setEndDate(x1);
-      })
-    );
-  }, [setEndDate, setStartDate, timeSeries]);
+      });
+    svg
+      .select<SVGGElement>('.brush')
+      .call(brush)
+      .call(brush.move.bind(this), [width / 2, width / 2 + width / 4]);
+  }, [setEndDate, setStartDate, timeSeries, width, svgRef]);
   return (
-    <svg ref={svgRef} width={width} height={120}>
-      <g className="confirmed-graph" />
-      <g className="x-axis" />
-      <g className="brush" />
-    </svg>
+    <div className="brush-container" ref={wrapperRef}>
+      <svg ref={svgRef}>
+        <g className="confirmed-graph" />
+        <g className="x-axis" />
+        <g className="brush" />
+      </svg>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSpring, useTransition, animated, config } from 'react-spring';
+import React, { useState, useEffect } from 'react';
+import { useSpring, animated, config } from 'react-spring';
 import { useMeasure } from 'react-use';
 import { PRIMARY_STATISTICS, STATISTIC_CONFIGS } from '../../Constants';
 
